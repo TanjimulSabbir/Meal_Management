@@ -49,6 +49,14 @@ const TableBody = () => {
     <div>
       <div className="overflow-x-auto h-screen w-full">
         <table className="table table-zebra table-xs lg:table-md table-pin-rows table-pin-cols">
+          <colgroup>
+            <col style={{ width: "60px" }} /> {/* Set the width of Serial column */}
+            <col style={{ minWidth: "150px" }} /> {/* Set the minimum width of Name column */}
+            {Days.days.map((day) => (
+              <col key={day.day} style={{ minWidth: "120px" }} /> 
+            ))}
+            <col style={{ width: "100px" }} /> {/* Set the width of Total Amount column */}
+          </colgroup>
           <thead className="font-Roboto">
             <tr>
               <th className="border bg-gray-600 text-white font-Bitter">Serial</th>
@@ -87,7 +95,7 @@ const TableBody = () => {
                             <>
                               <span>{hasCustomData}</span>
                               <button
-                                className="bg-blue-600 text-white px-1 py-2 rounded ml-2"
+                                className="bg-blue-600 text-xs text-white px-1 py-1 rounded mt-2 ml-2"
                                 onClick={() => handleEdit(name, day.day)}
                               >
                                 Edit
@@ -110,7 +118,7 @@ const TableBody = () => {
                               />
                               <button
                                 type="submit"
-                                className="bg-green-600 text-white px-4 py-2 rounded"
+                                className="bg-green-600 text-white px-4 py-2 rounded mt-2"
                               >
                                 Submit
                               </button>
@@ -119,7 +127,7 @@ const TableBody = () => {
                         </form>
                       ) : (
                         <select
-                          className="appearance-none cursor-pointer focus:outline-none px-1 min-w-8 max-w-full py-0 rounded"
+                          className="appearance-none cursor-pointer focus:outline-none px-1 w-full py-0 rounded"
                           value=""
                           onChange={(event) => handleChange(event, name, day.day)}
                         >
