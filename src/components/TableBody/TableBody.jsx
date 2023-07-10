@@ -6,39 +6,31 @@ const TableBody = () => {
   const [mealTypes, setMealTypes] = useState(["", "Full", "দুপুর", "D/M", "N/M", 0, "Custom",
   ]);
   const [isCustom, setIsCustom] = useState("");
-  const [data,setData]=useState("")
-  
-  const handleChange = (event) => {
+const [CustomValue,setCustomValue]=useState({});
+  const [NameDay,setNameDay]=useState({})
+
+  const handleChange = (event,name,day) => {
     setIsCustom(event.target.value)
-    event.target.value=mealTypes[mealTypes.length]
+    setNameDay({name,day})
   }
- console.log(isCustom)
+
   useEffect(() => {
     if (isCustom == "Custom") {
-      const NewData = prompt("enter new data")
-      console.log(NewData)
-     if(NewData==null){
-      setIsCustom("")
-      return ;
-     }else{
-      setData(NewData)
-      return setMealTypes([...mealTypes, NewData])
+      const NewData = prompt("enter new data");
+     if(NewData!==null){
+      setCustomValue({...CustomValue,NewData})
+      return setMealTypes([...mealTypes, NewData]);
      }
-    }else{
-      return ;
-     }
+    }
+    else{
+      return setCustomValue(isCustom);
+    }
   }, [isCustom])
 
-  console.log(mealTypes)
- const handleTdChange=(event,name,day)=>{
-  const target=event.target;
-  const targetData=(target.data-name);
-  console.log(targetData)
- }
+const MatchedName=Names.users.some(item=>item==NameDay.name)
+const MatchedDay=Days.days.some(item=>item.day===NameDay.day)
+console.log(MatchedName,MatchedDay,CustomValue,"MatchedName,MatchedDay,CustomValue")
 
-const getData=(name,day)=>{
-console.log(name,day)
-}
 
   return (
     <div>
@@ -71,13 +63,13 @@ console.log(name,day)
                 </td>
                 {/* Add the cells for each day */}
                 {Days.days.map((day) => (
-                  <td key={day.day} data-name={name} data-day={day} title="Select meal's type" className="bg-white border" onChange={(event)=>handleTdChange(event,name,day)}>
+                  <td key={day.day} title="Select meal's type" className="bg-white border" >
                     <select
                       className="appearance-none cursor-pointer focus:outline-none px-1 min-w-8 max-w-full py-0 rounded"
-                      // value={mealTypes[mealTypes.length-1]}
-                      onChange={handleChange}
+                      value={(MatchedName&&MatchedDay)?CustomValue.NewData:CustomValue}
+                      onChange={(event)=>handleChange(event,name,day.day)}
                     >
-                      .
+                      
                       {mealTypes.map((type) => (
                         <option key={type} value={type}>
                           {type}
