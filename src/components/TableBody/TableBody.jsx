@@ -3,34 +3,31 @@ import Days from "../../assets/JsonFiles/Days.json";
 import Names from "../../assets/JsonFiles/Names.json";
 
 const TableBody = () => {
-  const [mealTypes, setMealTypes] = useState(["", "Full", "দুপুর", "D/M", "N/M", 0, "Custom",
+  const [mealTypes, setMealTypes] = useState([
+    "",
+    "Full",
+    "দুপুর",
+    "D/M",
+    "N/M",
+    0,
+    "Custom",
   ]);
   const [isCustom, setIsCustom] = useState("");
-const [CustomValue,setCustomValue]=useState({});
-  const [NameDay,setNameDay]=useState({})
+  const [customData, setCustomData] = useState({});
 
-  const handleChange = (event,name,day) => {
-    setIsCustom(event.target.value)
-    setNameDay({name,day})
-  }
+  const handleChange = (event, name, day) => {
+    setIsCustom(event.target.value);
+  };
 
-  useEffect(() => {
-    if (isCustom == "Custom") {
-      const NewData = prompt("enter new data");
-     if(NewData!==null){
-      setCustomValue({...CustomValue,NewData})
-      return setMealTypes([...mealTypes, NewData]);
-     }
-    }
-    else{
-      return setCustomValue(isCustom);
-    }
-  }, [isCustom])
-
-const MatchedName=Names.users.some(item=>item==NameDay.name)
-const MatchedDay=Days.days.some(item=>item.day===NameDay.day)
-console.log(MatchedName,MatchedDay,CustomValue,"MatchedName,MatchedDay,CustomValue")
-
+  const handleCustomSubmit = (event, name, day) => {
+    event.preventDefault();
+    const inputValue = event.target.customData.value;
+    setCustomData((prevData) => ({
+      ...prevData,
+      [`${name}-${day}`]: inputValue,
+    }));
+    setIsCustom("");
+  };
 
   return (
     <div>
@@ -63,22 +60,37 @@ console.log(MatchedName,MatchedDay,CustomValue,"MatchedName,MatchedDay,CustomVal
                 </td>
                 {/* Add the cells for each day */}
                 {Days.days.map((day) => (
-                  <td key={day.day} title="Select meal's type" className="bg-white border" >
-                    <select
-                      className="appearance-none cursor-pointer focus:outline-none px-1 min-w-8 max-w-full py-0 rounded"
-                      value={(MatchedName&&MatchedDay)?CustomValue.NewData:CustomValue}
-                      onChange={(event)=>handleChange(event,name,day.day)}
-                    >
-                      
-                      {mealTypes.map((type) => (
-                        <option key={type} value={type}>
-                          {type}
-                        </option>
-                      ))}
-                    </select>
+                  <td key={day.day} title="Select meal's type" className="bg-white border">
+                    {isCustom === "Custom" && (
+                      <form onSubmit={(event) => handleCustomSubmit(event, name, day.day)}>
+                        <input
+                          type="text"
+                          name="customData"
+                          className="border rounded px-2 py-1"
+                          placeholder="Enter custom data"
+                        />
+                        <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">
+                          Submit
+                        </button>
+                      </form>
+                    )}
+                    {customData[`${name}-${day.day}`] ? (
+                      customData[`${name}-${day.day}`]
+                    ) : (
+                      <select
+                        className="appearance-none cursor-pointer focus:outline-none px-1 min-w-8 max-w-full py-0 rounded"
+                        value={isCustom}
+                        onChange={(event) => handleChange(event, name, day.day)}
+                      >
+                        {mealTypes.map((type) => (
+                          <option key={type} value={type}>
+                            {type}
+                          </option>
+                        ))}
+                      </select>
+                    )}
                   </td>
                 ))}
-
               </tr>
             ))}
           </tbody>
