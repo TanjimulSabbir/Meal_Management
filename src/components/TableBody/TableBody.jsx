@@ -7,28 +7,37 @@ const TableBody = () => {
   ]);
   const [isCustom, setIsCustom] = useState("");
   const [data,setData]=useState("")
+  
   const handleChange = (event) => {
     setIsCustom(event.target.value)
+    event.target.value=mealTypes[mealTypes.length]
   }
  console.log(isCustom)
   useEffect(() => {
-    if (isCustom =="Custom") {
+    if (isCustom == "Custom") {
       const NewData = prompt("enter new data")
+      console.log(NewData)
+     if(NewData==null){
+      setIsCustom("")
+      return ;
+     }else{
       setData(NewData)
-    return setMealTypes([...mealTypes, NewData])
+      return setMealTypes([...mealTypes, NewData])
+     }
     }else{
-      setData(isCustom)
-    }
+      return ;
+     }
   }, [isCustom])
+
   console.log(mealTypes)
  const handleTdChange=(event,name,day)=>{
   const target=event.target;
-  const targetData=(target.data-name)-(target.data-day);
+  const targetData=(target.data-name);
   console.log(targetData)
  }
 
 const getData=(name,day)=>{
-console.log(name-day)
+console.log(name,day)
 }
 
   return (
@@ -65,9 +74,10 @@ console.log(name-day)
                   <td key={day.day} data-name={name} data-day={day} title="Select meal's type" className="bg-white border" onChange={(event)=>handleTdChange(event,name,day)}>
                     <select
                       className="appearance-none cursor-pointer focus:outline-none px-1 min-w-8 max-w-full py-0 rounded"
-                      value={getData(name,day)}
+                      // value={mealTypes[mealTypes.length-1]}
                       onChange={handleChange}
                     >
+                      .
                       {mealTypes.map((type) => (
                         <option key={type} value={type}>
                           {type}
