@@ -12,15 +12,20 @@ const TableBody = () => {
     0,
     "Custom",
   ]);
-  const [isCustom, setIsCustom] = useState("");
   const [customData, setCustomData] = useState({});
 
   const handleChange = (event, name, day) => {
     const selectedValue = event.target.value;
     if (selectedValue === "Custom") {
-      setIsCustom(`${name}-${day}`);
+      setCustomData((prevData) => ({
+        ...prevData,
+        [`${name}-${day}`]: "",
+      }));
     } else {
-      setIsCustom(selectedValue);
+      setCustomData((prevData) => ({
+        ...prevData,
+        [`${name}-${day}`]: selectedValue,
+      }));
     }
   };
 
@@ -31,11 +36,13 @@ const TableBody = () => {
       ...prevData,
       [`${name}-${day}`]: inputValue,
     }));
-    setIsCustom(inputValue);
   };
 
   const handleEdit = (name, day) => {
-    setIsCustom(`${name}-${day}`);
+    setCustomData((prevData) => ({
+      ...prevData,
+      [`${name}-${day}`]: "",
+    }));
   };
 
   return (
@@ -70,50 +77,58 @@ const TableBody = () => {
                 {/* Add the cells for each day */}
                 {Days.days.map((day) => {
                   const cellKey = `${name}-${day.day}`;
-                  const isCustomCell = isCustom === cellKey;
                   const hasCustomData = customData[cellKey];
 
                   return (
                     <td key={day.day} title="Select meal's type" className="bg-white border">
-                      {isCustomCell ? (
+                      {hasCustomData !== undefined ? (
                         <form onSubmit={(event) => handleCustomSubmit(event, name, day.day)}>
-                          <input
-                            type="text"
-                            name="customData"
-                            className="border rounded px-2 py-1"
-                            placeholder="Enter custom data"
-                            defaultValue={hasCustomData ? customData[cellKey] : ""}
-                          />
-                          <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">
-                            Submit
-                          </button>
-                        </form>
-                      ) : (
-                        <>
                           {hasCustomData ? (
                             <>
-                              <span>{customData[cellKey]}</span>
+                              <span>{hasCustomData}</span>
                               <button
-                                className="bg-blue-500 text-white px-1 py-2 rounded ml-2"
+                                className="bg-blue-600 text-white px-1 py-2 rounded ml-2"
                                 onClick={() => handleEdit(name, day.day)}
                               >
                                 Edit
                               </button>
                             </>
                           ) : (
-                            <select
-                              className="appearance-none cursor-pointer focus:outline-none px-1 min-w-8 max-w-full py-0 rounded"
-                              value=""
-                              onChange={(event) => handleChange(event, name, day.day)}
-                            >
-                              {mealTypes.map((type) => (
-                                <option key={type} value={type}>
-                                  {type}
-                                </option>
-                              ))}
-                            </select>
+                            <>
+                              <input
+                                type="text"
+                                name="customData"
+                                className="border rounded px-2 py-1"
+                                placeholder="Enter custom data"
+                                value={hasCustomData || ""}
+                                onChange={(event) =>
+                                  setCustomData((prevData) => ({
+                                    ...prevData,
+                                    [cellKey]: event.target.value,
+                                  }))
+                                }
+                              />
+                              <button
+                                type="submit"
+                                className="bg-green-600 text-white px-4 py-2 rounded"
+                              >
+                                Submit
+                              </button>
+                            </>
                           )}
-                        </>
+                        </form>
+                      ) : (
+                        <select
+                          className="appearance-none cursor-pointer focus:outline-none px-1 min-w-8 max-w-full py-0 rounded"
+                          value=""
+                          onChange={(event) => handleChange(event, name, day.day)}
+                        >
+                          {mealTypes.map((type) => (
+                            <option key={type} value={type}>
+                              {type}
+                            </option>
+                          ))}
+                        </select>
                       )}
                     </td>
                   );
