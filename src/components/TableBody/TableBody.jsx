@@ -1,8 +1,24 @@
+import { useState } from "react";
 import Days from "../../assets/JsonFiles/Days.json";
 import Names from "../../assets/JsonFiles/Names.json"
 
 const TableBody = () => {
-	const MealTypes = ["", "Full", "দুপুর", "D/M", "N/M", 0,]
+	const MealTypes = ["", "Full", "দুপুর", "D/M", "N/M", 0, "Custom"];
+	const [mealType, setMealType] = useState('');
+
+	const handleSelectChange = (event) => {
+		const selectedValue = event.target.value;
+		if (selectedValue === 'Custom') {
+			const userInput = prompt('Enter custom meal type:');
+			if (userInput !== null) {
+				setMealType(userInput);
+			} else {
+				setMealType('');
+			}
+		} else {
+			setMealType(selectedValue);
+		}
+	};
 
 	return (
 		<div className="">
@@ -31,16 +47,19 @@ const TableBody = () => {
 									<td className="border w-full bg-gray-600 text-white font-Bitter sticky left-0">{name}</td>
 									{/* Add the cells for each day */}
 									{Days.days.map(day => {
+
 										return (
 											<td key={day.day} title="select meal's type" className="bg-white border mx-auto w-full">
-												<select className={`appearance-none w-16 h-8 cursor-pointer focus:outline-none px-2 py-0 rounded `}>
-													{MealTypes.map(type => {
-														return (
-															<option key={type} value={type}>
-																{type}
-															</option>
-														)
-													})}
+												<select
+													className={`appearance-none w-32 h-8 cursor-pointer focus:outline-none px-2 py-0 rounded`}
+													value={mealType}
+													onChange={handleSelectChange}
+												>
+													{MealTypes.map((type) => (
+														<option key={type} value={type}>
+															{type}
+														</option>
+													))}
 												</select>
 											</td>
 										);
