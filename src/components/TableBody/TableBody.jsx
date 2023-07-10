@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Days from "../../assets/JsonFiles/Days.json";
 import Names from "../../assets/JsonFiles/Names.json";
 
@@ -98,8 +98,8 @@ const TableBody = () => {
       <div className="overflow-x-auto h-screen w-full">
         <table className="table table-zebra table-xs lg:table-md table-pin-rows table-pin-cols">
           <colgroup>
-            <col style={{ width: "60px" }} />
-            <col style={{ minWidth: "150px" }} />
+            <col style={{ width: "0px" }} />
+            <col style={{ minWidth: "0px" }} />
             {Days.days.map((day) => (
               <col key={day.day} style={{ minWidth: "120px" }} />
             ))}
