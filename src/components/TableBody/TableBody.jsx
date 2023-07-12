@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Days from "../../assets/JsonFiles/Days.json";
 import Names from "../../assets/JsonFiles/Names.json";
+import axios from "axios";
 
 const TableBody = () => {
   const [mealTypes, setMealTypes] = useState([
@@ -14,6 +15,7 @@ const TableBody = () => {
   ]);
   const [customData, setCustomData] = useState({});
   const [isCustom, setIsCustom] = useState("");
+  const [AllData,setAllData]=useState([])
 
   const handleChange = (event, name, day) => {
     const selectedValue = event.target.value;
@@ -21,20 +23,15 @@ const TableBody = () => {
       setIsCustom(`${name}-${day}`);
     } else {
       setIsCustom("");
-      setCustomData((prevData) => ({
-        ...prevData,
-        [`${name}-${day}`]: selectedValue,
-      }));
+      setCustomData((prevData) => ({ ...prevData, [`${name}-${day}`]: selectedValue}));
+      SendDataToDatabase({name,day,cellData:selectedValue})
     }
   };
-
   const handleCustomSubmit = (event, name, day) => {
     event.preventDefault();
     const inputValue = event.target.customData.value;
-    setCustomData((prevData) => ({
-      ...prevData,
-      [`${name}-${day}`]: inputValue,
-    }));
+    setCustomData((prevData) => ({...prevData,[`${name}-${day}`]: inputValue,}));
+    SendDataToDatabase({name,day,cellData:inputValue})
     setIsCustom("");
   };
 
@@ -51,12 +48,7 @@ const TableBody = () => {
       <td key={day} title="Select meal's type" className="bg-white border">
         {isCustomCell ? (
           <form onSubmit={(event) => handleCustomSubmit(event, name, day)}>
-            <input
-              type="text"
-              name="customData"
-              className="border rounded px-2 py-1"
-              placeholder="Enter custom data"
-              defaultValue={hasCustomData || ""}
+            <input type="text" name="customData" className="border rounded px-2 py-1" placeholder="Enter custom data" defaultValue={hasCustomData || ""}
             />
             <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded mt-2">
               Submit
@@ -93,6 +85,46 @@ const TableBody = () => {
     );
   };
 
+const SendDataToDatabase= async(data)=>{
+
+  const now = new Date();
+  const options = { timeZone: 'Asia/Dhaka', hour12: false };
+  const localTime = now.toLocaleTimeString('en-US', options);
+  const localDate = now.toLocaleDateString('en-US', options);
+  
+const EstimateDay=data.day.split(" ")[1];
+console.log(EstimateDay,"EstimateDay")
+
+// if(localTime > "10.30PM" && localDate!=EstimateDay)
+  
+
+return;
+
+
+axios.post('http://localhost:5000/addData', data)
+.then(function (response) {
+  console.log(response);
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+try {
+  const response = await axios.get('http://localhost:5000/getData');
+
+  if (response.statusText !== 'OK') {
+    return;
+  }
+
+  const data = response.data;
+  setAllData(data);
+  console.log(data, 'AllData');
+} catch (error) {
+  console.log(error);
+}
+
+}
+
   return (
     <div>
       <div className="overflow-x-auto h-screen w-full">
@@ -124,7 +156,7 @@ const TableBody = () => {
             {Names.users.map((name, index) => (
               <tr key={name}>
                 <td className="border-b border-r bg-gray-600 text-white font-Bitter">{index + 1}</td>
-                <td className="border w-full bg-gray-600 text-white font-Bitter sticky left-0">
+                <td className={`border w-full bg-gray-600 text-white font-Bitter sticky left-0 ${name==="Tanjimul"&& "bg-green-600"}`}>
                   {name}
                 </td>
                 {Days.days.map((day) => renderCell(name, day.day))}
