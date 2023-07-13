@@ -5,45 +5,36 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const TableBody = () => {
-  const [mealTypes, setMealTypes] = useState([
-    "",
-    "Full",
-    "দুপুর",
-    "D/M",
-    "N/M",
-    0,
-    "Custom",
-  ]);
+  const [mealTypes, setMealTypes] = useState(["", "Full", "Dupur", "D/M", "N/M", 0, "Custom"]);
   const [customData, setCustomData] = useState({});
   const [isCustom, setIsCustom] = useState("");
   const [AllData, setAllData] = useState();
+  const [Over, setOver] = useState(false)
 
-useEffect(()=>{
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/getData');
-      if (response.statusText !== 'OK') {
-        return;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/getData');
+        if (response.statusText !== 'OK') {
+          return;
+        }
+        const data = response.data;
+        setAllData(data);
+        console.log(data, 'AllData');
+      } catch (error) {
+        console.log(error);
       }
-      const data = response.data;
-      setAllData(data);
-      console.log(data, 'AllData');
-    } catch (error) {
-      console.log(error);
     }
-  }
-  fetchData()
-})
-
+    fetchData()
+  }, [customData])
 
   const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
   const currentHour = new Date().getHours();
   const currentMinutes = new Date().getMinutes();
   const CurrentDay = parseInt(now.split("/")[1], 10);
 
-
   const handleChange = (event, name, day) => {
+
     const selectedValue = event.target.value;
     if (selectedValue === "Custom") {
       setIsCustom(`${name}-${day}`);
@@ -52,7 +43,6 @@ useEffect(()=>{
       setCustomData((prevData) => ({ ...prevData, [`${name}-${day}`]: selectedValue }));
       SendDataToDatabase({ name, day, cellData: selectedValue })
     }
-
   };
   const handleCustomSubmit = (event, name, day) => {
     event.preventDefault();
@@ -64,6 +54,10 @@ useEffect(()=>{
 
   const handleEdit = (name, day) => {
     setIsCustom(`${name}-${day}`);
+    setCustomData((prevData) => ({
+      ...prevData,
+      [`${name}-${day}`]: "",
+    }));
   };
 
   const renderCell = (name, day) => {
@@ -71,10 +65,26 @@ useEffect(()=>{
     const cellKey = `${name}-${day}`;
     const isCustomCell = isCustom === cellKey;
     const hasCustomData = customData[cellKey];
-  
-  
+    const isAllowedTime = currentHour < 22 || (currentHour === 22 && currentMinutes <= 30);
+    const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay)
+
+    const matchedFilter = [];
+    AllData?.forEach(item => {
+      const FindName = item.name;
+      const matched = item.info.find(data => data.day == day)
+      if (matched) {
+          const FinalMatched = matched.day === day && FindName === name;
+          // setCustomData(matched.cellData)
+          if(FinalMatched){
+            matchedFilter.push(FinalMatched,matched.cellData)
+          }
+      }
+    })
+    console.log(matchedFilter, "MatchedDays")
+
+
     return (
-      <td key={day} title="Select meal's type" className="bg-white border">
+      <td key={day} title={`${name}-${day}`} className="bg-white border">
         {isCustomCell ? (
           <form onSubmit={(event) => handleCustomSubmit(event, name, day)}>
             <input type="text" name="customData" className="border rounded px-2 py-1" placeholder="Enter custom data" defaultValue={hasCustomData || ""}
@@ -97,7 +107,7 @@ useEffect(()=>{
               </>
             ) : (
               <select
-                className={`appearance-none cursor-pointer focus:outline-none px-1 w-full py-0 rounded ${CurrentDay === EstimateDay ? "block" : "hidden"}`}
+                className={`appearance-none cursor-pointer focus:outline-none px-1 w-full py-0 rounded ${TimeRemaining ? "block" : "hidden"}`}
                 value=""
                 onChange={(event) => handleChange(event, name, day)}
               >
@@ -115,13 +125,8 @@ useEffect(()=>{
   };
 
   const SendDataToDatabase = async (data) => {
-
     const EstimateDay = parseInt(data.day.split(" ")[1]);
-
-    const isAllowedTime = currentHour < 22 || (currentHour === 22 && currentMinutes <= 30);
-
-    console.log(isAllowedTime, EstimateDay, CurrentDay)
-
+    const isAllowedTime = currentHour < 15 || (currentHour === 22 && currentMinutes <= 30);
 
     if (isAllowedTime && EstimateDay == CurrentDay) {
       Swal.fire({
@@ -135,7 +140,7 @@ useEffect(()=>{
       });
     } else {
       Swal.fire({
-        title: `Time Over for Set Meal. Current Time ${currentHour.currentMinutes}`,
+        title: `Time Over for Set Meal. Current Time ${currentHour}:${currentMinutes}`,
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },
@@ -143,6 +148,7 @@ useEffect(()=>{
           popup: 'animate__animated animate__fadeOutUp'
         }
       });
+      return setOver(true);
     }
 
     axios.post('http://localhost:5000/addData', data)
@@ -153,7 +159,6 @@ useEffect(()=>{
         console.log(error);
       });
   }
-
   return (
     <div>
       <div className="overflow-x-auto h-screen w-full">
