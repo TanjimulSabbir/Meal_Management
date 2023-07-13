@@ -115,8 +115,8 @@ const TableBody = () => {
           <tbody>
             {Names.users.map((name, index) => (
               <tr key={name}>
-                <td className="border-b border-r bg-gray-600 text-white font-Bitter">{index + 1}</td>
-                <td className={`border w-full bg-gray-600 text-white font-Bitter sticky left-0 ${name === "Tanjimul" && "bg-green-600"}`}>
+                <td className="border-b border-r z-50 bg-gray-600 text-white font-Bitter">{index + 1}</td>
+                <td className={`border w-full z-50 bg-gray-600 text-white font-Bitter sticky left-0 ${name === "Tanjimul" && "bg-green-600"}`}>
                   {name}
                 </td>
                 {Days.days.map((day) => <TdCellRender key={name} {...{mealTypes,isCustom,customData, name, day: day.day, AllData, handleChange,handleCustomSubmit, handleEdit }}></TdCellRender>)}
