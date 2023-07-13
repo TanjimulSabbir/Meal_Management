@@ -35,11 +35,11 @@ const TableBody = () => {
 
   const handleChange = (event, name, day) => {
     const EstimateDay = parseInt(day.split(" ")[1]);
-    const isAllowedTime = currentHour < 22 || (currentHour === 22 && currentMinutes <= 30);
+    const isAllowedTime = currentHour < 23 || (currentHour === 22 && currentMinutes <= 30);
     const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay)
     if (!TimeRemaining) {
       Swal.fire({
-        title: `Time Over for Set Meal. Current Time ${currentHour}:${currentMinutes}`,
+        text: `You can't set meal, now.`,
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },
@@ -47,21 +47,22 @@ const TableBody = () => {
           popup: 'animate__animated animate__fadeOutUp'
         }
       });
-      return setOver(true);
-    } 
+      return;
+    }
+
     const selectedValue = event.target.value;
     if (selectedValue === "Custom") {
       setIsCustom(`${name}-${day}`);
     } else {
       setIsCustom("");
       setCustomData((prevData) => ({ ...prevData, [`${name}-${day}`]: selectedValue }));
-      SendDataToDatabase({ name, day, cellData: selectedValue })
+      return SendDataToDatabase({ name, day, cellData: selectedValue })
     }
   };
   const handleCustomSubmit = (event, name, day) => {
     event.preventDefault();
     const inputValue = event.target.customData.value;
-    setCustomData((prevData) => ({ ...prevData, [`${name}-${day}`]: inputValue, }));
+    setCustomData((prevData) => ({ ...prevData, [`${name}-${day}`]: inputValue }));
     SendDataToDatabase({ name, day, cellData: inputValue })
     setIsCustom("");
   };
@@ -75,65 +76,62 @@ const TableBody = () => {
   };
 
   const renderCell = (name, day) => {
-    const EstimateDay = parseInt(day.split(" ")[1]);
     const cellKey = `${name}-${day}`;
     const isCustomCell = isCustom === cellKey;
     const hasCustomData = customData[cellKey];
-    const isAllowedTime = currentHour < 22 || (currentHour === 22 && currentMinutes <= 30);
-    const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay)
 
     let matchedFilter = "";
     AllData?.forEach(item => {
       const FindName = item.name;
       const matched = item.info.find(data => data.day == day)
       if (matched) {
-          const FinalMatched = matched.day === day && FindName === name;
-          // setCustomData(matched.cellData)
-          if(FinalMatched){
-            matchedFilter=matched.cellData
-          }
+        const FinalMatched = matched.day === day && FindName === name;
+        // setCustomData(matched.cellData)
+        if (FinalMatched) {
+          matchedFilter = matched.cellData
+        }
       }
     })
-    console.log(matchedFilter, "MatchedDays")
+    console.log(matchedFilter, hasCustomData, "MatchedDays")
+
 
     return (
-      <td key={day} title={`${name}-${day}`} className="bg-white border">
-        {isCustomCell ? (
-          <form onSubmit={(event) => handleCustomSubmit(event, name, day)}>
-            <input type="text" name="customData" className="border rounded px-2 py-1" placeholder="Enter custom data" defaultValue={hasCustomData || ""}
-            />
-            <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded mt-2">
-              Submit
-            </button>
-          </form>
-        ) : (
-          <>
-            {hasCustomData ? (
-              <>
-                <span>{hasCustomData}</span>
-                <button
-                  className={`bg-blue-600 text-xs text-white px-1 py-1 rounded mt-2 ml-2 `}
-                  onClick={() => handleEdit( name, day)}
+      <>
+        <td key={`${name}-${day}`} className="bg-white border" >
+          {isCustomCell ? (
+            <form onSubmit={(event) => handleCustomSubmit(event, name, day)}>
+              <input type="text" name="customData" className="border rounded px-2 py-1" placeholder="Enter custom data" defaultValue={hasCustomData || ""}
+              />
+              <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded mt-2">
+                Submit
+              </button>
+            </form>
+          ) : (
+            <>
+              {hasCustomData ? (
+                <>
+                  <span>{hasCustomData}</span>
+                  <button className={`bg-blue-600 text-xs text-white p-1 rounded mt-2 ml-2 `} onClick={() => handleEdit(name, day)}> Edit
+                  </button>
+                </>
+              ) : (
+                <select
+                  title={matchedFilter}
+                  className={`appearance-none bg-white cursor-pointer focus:outline-none overflow-x-visible min-w-[120px]`}
+                  value={matchedFilter || ""}
+                  onChange={(event) => handleChange(event, name, day)}
                 >
-                  Edit
-                </button>
-              </>
-            ) : (
-              <select
-                className={`appearance-none cursor-pointer focus:outline-none px-1 w-full py-0 rounded`}
-                value={matchedFilter?matchedFilter:""}
-                onChange={(event) => handleChange(event, name, day)}
-              >
-                {mealTypes.map((type) => (
-                  <option key={type}  value={type}>
+                  <option className="bg-green-700" value={matchedFilter || ""}>{matchedFilter}</option>
+                  {mealTypes.map((type) => (<option key={type} value={type}>
                     {type}
                   </option>
-                ))}
-              </select>
-            )}
-          </>
-        )}
-      </td>
+                  ))}
+                </select>
+              )}
+            </>
+          )}
+        </td>
+      </>
     );
   };
 
@@ -150,14 +148,14 @@ const TableBody = () => {
     <div>
       <div className="overflow-x-auto h-screen w-full">
         <table className="table table-zebra table-xs lg:table-md table-pin-rows table-pin-cols">
-          <colgroup>
+          {/* <colgroup>
             <col style={{ width: "0px" }} />
             <col style={{ minWidth: "0px" }} />
             {Days.days.map((day) => (
-              <col key={day.day} style={{ minWidth: "120px" }} />
+              <col key={day.day} style={{ minWidth: "150px" }} />
             ))}
             <col style={{ width: "100px" }} />
-          </colgroup>
+          </colgroup> */}
           <thead className="font-Roboto">
             <tr>
               <th className="border bg-gray-600 text-white font-Bitter">Serial</th>
