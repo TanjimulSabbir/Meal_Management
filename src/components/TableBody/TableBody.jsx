@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Days from "../../assets/JsonFiles/Days.json";
 import Names from "../../assets/JsonFiles/Names.json";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const TableBody = () => {
   const [mealTypes, setMealTypes] = useState([
@@ -15,7 +16,32 @@ const TableBody = () => {
   ]);
   const [customData, setCustomData] = useState({});
   const [isCustom, setIsCustom] = useState("");
-  const [AllData,setAllData]=useState([])
+  const [AllData, setAllData] = useState();
+
+useEffect(()=>{
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/getData');
+      if (response.statusText !== 'OK') {
+        return;
+      }
+      const data = response.data;
+      setAllData(data);
+      console.log(data, 'AllData');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  fetchData()
+})
+
+
+  const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
+  const currentHour = new Date().getHours();
+  const currentMinutes = new Date().getMinutes();
+  const CurrentDay = parseInt(now.split("/")[1], 10);
+
 
   const handleChange = (event, name, day) => {
     const selectedValue = event.target.value;
@@ -23,15 +49,16 @@ const TableBody = () => {
       setIsCustom(`${name}-${day}`);
     } else {
       setIsCustom("");
-      setCustomData((prevData) => ({ ...prevData, [`${name}-${day}`]: selectedValue}));
-      SendDataToDatabase({name,day,cellData:selectedValue})
+      setCustomData((prevData) => ({ ...prevData, [`${name}-${day}`]: selectedValue }));
+      SendDataToDatabase({ name, day, cellData: selectedValue })
     }
+
   };
   const handleCustomSubmit = (event, name, day) => {
     event.preventDefault();
     const inputValue = event.target.customData.value;
-    setCustomData((prevData) => ({...prevData,[`${name}-${day}`]: inputValue,}));
-    SendDataToDatabase({name,day,cellData:inputValue})
+    setCustomData((prevData) => ({ ...prevData, [`${name}-${day}`]: inputValue, }));
+    SendDataToDatabase({ name, day, cellData: inputValue })
     setIsCustom("");
   };
 
@@ -40,10 +67,12 @@ const TableBody = () => {
   };
 
   const renderCell = (name, day) => {
+    const EstimateDay = parseInt(day.split(" ")[1]);
     const cellKey = `${name}-${day}`;
     const isCustomCell = isCustom === cellKey;
     const hasCustomData = customData[cellKey];
-
+  
+  
     return (
       <td key={day} title="Select meal's type" className="bg-white border">
         {isCustomCell ? (
@@ -60,15 +89,15 @@ const TableBody = () => {
               <>
                 <span>{hasCustomData}</span>
                 <button
-                  className="bg-blue-600 text-xs text-white px-1 py-1 rounded mt-2 ml-2"
-                  onClick={() => handleEdit(name, day)}
+                  className={`bg-blue-600 text-xs text-white px-1 py-1 rounded mt-2 ml-2 `}
+                  onClick={(event) => handleEdit(event, name, day)}
                 >
                   Edit
                 </button>
               </>
             ) : (
               <select
-                className="appearance-none cursor-pointer focus:outline-none px-1 w-full py-0 rounded"
+                className={`appearance-none cursor-pointer focus:outline-none px-1 w-full py-0 rounded ${CurrentDay === EstimateDay ? "block" : "hidden"}`}
                 value=""
                 onChange={(event) => handleChange(event, name, day)}
               >
@@ -85,45 +114,45 @@ const TableBody = () => {
     );
   };
 
-const SendDataToDatabase= async(data)=>{
+  const SendDataToDatabase = async (data) => {
 
-  const now = new Date();
-  const options = { timeZone: 'Asia/Dhaka', hour12: false };
-  const localTime = now.toLocaleTimeString('en-US', options);
-  const localDate = now.toLocaleDateString('en-US', options);
-  
-const EstimateDay=data.day.split(" ")[1];
-console.log(EstimateDay,"EstimateDay")
+    const EstimateDay = parseInt(data.day.split(" ")[1]);
 
-// if(localTime > "10.30PM" && localDate!=EstimateDay)
-  
+    const isAllowedTime = currentHour < 22 || (currentHour === 22 && currentMinutes <= 30);
 
-return;
+    console.log(isAllowedTime, EstimateDay, CurrentDay)
 
 
-axios.post('http://localhost:5000/addData', data)
-.then(function (response) {
-  console.log(response);
-})
-.catch(function (error) {
-  console.log(error);
-});
+    if (isAllowedTime && EstimateDay == CurrentDay) {
+      Swal.fire({
+        title: 'Welcome, you are eligible for set meal.',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+    } else {
+      Swal.fire({
+        title: `Time Over for Set Meal. Current Time ${currentHour.currentMinutes}`,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+    }
 
-try {
-  const response = await axios.get('http://localhost:5000/getData');
-
-  if (response.statusText !== 'OK') {
-    return;
+    axios.post('http://localhost:5000/addData', data)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-
-  const data = response.data;
-  setAllData(data);
-  console.log(data, 'AllData');
-} catch (error) {
-  console.log(error);
-}
-
-}
 
   return (
     <div>
@@ -156,7 +185,7 @@ try {
             {Names.users.map((name, index) => (
               <tr key={name}>
                 <td className="border-b border-r bg-gray-600 text-white font-Bitter">{index + 1}</td>
-                <td className={`border w-full bg-gray-600 text-white font-Bitter sticky left-0 ${name==="Tanjimul"&& "bg-green-600"}`}>
+                <td className={`border w-full bg-gray-600 text-white font-Bitter sticky left-0 ${name === "Tanjimul" && "bg-green-600"}`}>
                   {name}
                 </td>
                 {Days.days.map((day) => renderCell(name, day.day))}
