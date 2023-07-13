@@ -33,13 +33,16 @@ const TableBody = () => {
   const currentMinutes = new Date().getMinutes();
   const CurrentDay = parseInt(now.split("/")[1], 10);
 
+  const TextData=`Oops! It seems you're trying to select meal outside the designated ordering hours. The meal selection service is available only from 12.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact manager +8801780242695. Thank you!`
+
   const handleChange = (event, name, day) => {
     const EstimateDay = parseInt(day.split(" ")[1]);
     const isAllowedTime = currentHour < 23 || (currentHour === 22 && currentMinutes <= 30);
     const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay)
     if (!TimeRemaining) {
       Swal.fire({
-        text: `Oops! It seems you're trying to select meal outside the designated ordering hours. The meal selection service is available only from 12.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact manager +8801780242695. Thank you!`,
+        title:"oops!",
+       html: "<small style='color:green; text-align:justify'>" + TextData + "</small>",
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },
