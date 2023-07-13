@@ -68,7 +68,7 @@ const TableBody = () => {
     const isAllowedTime = currentHour < 22 || (currentHour === 22 && currentMinutes <= 30);
     const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay)
 
-    const matchedFilter = [];
+    let matchedFilter = "";
     AllData?.forEach(item => {
       const FindName = item.name;
       const matched = item.info.find(data => data.day == day)
@@ -76,7 +76,7 @@ const TableBody = () => {
           const FinalMatched = matched.day === day && FindName === name;
           // setCustomData(matched.cellData)
           if(FinalMatched){
-            matchedFilter.push(FinalMatched,matched.cellData)
+            matchedFilter=matched.cellData
           }
       }
     })
@@ -97,7 +97,7 @@ const TableBody = () => {
           <>
             {hasCustomData ? (
               <>
-                <span>{hasCustomData}</span>
+                <span>{matchedFilter}</span>
                 <button
                   className={`bg-blue-600 text-xs text-white px-1 py-1 rounded mt-2 ml-2 `}
                   onClick={(event) => handleEdit(event, name, day)}
@@ -107,8 +107,8 @@ const TableBody = () => {
               </>
             ) : (
               <select
-                className={`appearance-none cursor-pointer focus:outline-none px-1 w-full py-0 rounded ${TimeRemaining ? "block" : "hidden"}`}
-                value=""
+                className={`appearance-none cursor-pointer focus:outline-none px-1 w-full py-0 rounded`}
+                value={matchedFilter}
                 onChange={(event) => handleChange(event, name, day)}
               >
                 {mealTypes.map((type) => (
