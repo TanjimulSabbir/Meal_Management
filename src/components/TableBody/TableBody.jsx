@@ -37,17 +37,7 @@ const TableBody = () => {
     const EstimateDay = parseInt(day.split(" ")[1]);
     const isAllowedTime = currentHour < 22 || (currentHour === 22 && currentMinutes <= 30);
     const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay)
-    if (isAllowedTime && EstimateDay == CurrentDay) {
-      Swal.fire({
-        title: 'Welcome, you are eligible for set meal.',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      });
-    } else {
+    if (!TimeRemaining) {
       Swal.fire({
         title: `Time Over for Set Meal. Current Time ${currentHour}:${currentMinutes}`,
         showClass: {
@@ -58,7 +48,7 @@ const TableBody = () => {
         }
       });
       return setOver(true);
-    }
+    } 
     const selectedValue = event.target.value;
     if (selectedValue === "Custom") {
       setIsCustom(`${name}-${day}`);
@@ -148,9 +138,6 @@ const TableBody = () => {
   };
 
   const SendDataToDatabase = async (data) => {
-    const EstimateDay = parseInt(data.day.split(" ")[1]);
-    const isAllowedTime = currentHour < 15 || (currentHour === 22 && currentMinutes <= 30);
-
     axios.post('http://localhost:5000/addData', data)
       .then(function (response) {
         console.log(response);
