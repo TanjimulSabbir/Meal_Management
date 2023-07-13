@@ -34,7 +34,31 @@ const TableBody = () => {
   const CurrentDay = parseInt(now.split("/")[1], 10);
 
   const handleChange = (event, name, day) => {
-
+    const EstimateDay = parseInt(day.split(" ")[1]);
+    const isAllowedTime = currentHour < 22 || (currentHour === 22 && currentMinutes <= 30);
+    const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay)
+    if (isAllowedTime && EstimateDay == CurrentDay) {
+      Swal.fire({
+        title: 'Welcome, you are eligible for set meal.',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+    } else {
+      Swal.fire({
+        title: `Time Over for Set Meal. Current Time ${currentHour}:${currentMinutes}`,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+      return setOver(true);
+    }
     const selectedValue = event.target.value;
     if (selectedValue === "Custom") {
       setIsCustom(`${name}-${day}`);
@@ -82,7 +106,6 @@ const TableBody = () => {
     })
     console.log(matchedFilter, "MatchedDays")
 
-
     return (
       <td key={day} title={`${name}-${day}`} className="bg-white border">
         {isCustomCell ? (
@@ -97,10 +120,10 @@ const TableBody = () => {
           <>
             {hasCustomData ? (
               <>
-                <span>{matchedFilter}</span>
+                <span>{hasCustomData}</span>
                 <button
                   className={`bg-blue-600 text-xs text-white px-1 py-1 rounded mt-2 ml-2 `}
-                  onClick={(event) => handleEdit(event, name, day)}
+                  onClick={() => handleEdit( name, day)}
                 >
                   Edit
                 </button>
@@ -108,11 +131,11 @@ const TableBody = () => {
             ) : (
               <select
                 className={`appearance-none cursor-pointer focus:outline-none px-1 w-full py-0 rounded`}
-                value={matchedFilter}
+                value={matchedFilter?matchedFilter:""}
                 onChange={(event) => handleChange(event, name, day)}
               >
                 {mealTypes.map((type) => (
-                  <option key={type} value={type}>
+                  <option key={type}  value={type}>
                     {type}
                   </option>
                 ))}
@@ -127,29 +150,6 @@ const TableBody = () => {
   const SendDataToDatabase = async (data) => {
     const EstimateDay = parseInt(data.day.split(" ")[1]);
     const isAllowedTime = currentHour < 15 || (currentHour === 22 && currentMinutes <= 30);
-
-    if (isAllowedTime && EstimateDay == CurrentDay) {
-      Swal.fire({
-        title: 'Welcome, you are eligible for set meal.',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      });
-    } else {
-      Swal.fire({
-        title: `Time Over for Set Meal. Current Time ${currentHour}:${currentMinutes}`,
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      });
-      return setOver(true);
-    }
 
     axios.post('http://localhost:5000/addData', data)
       .then(function (response) {
