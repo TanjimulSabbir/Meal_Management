@@ -39,7 +39,7 @@ const TableBody = () => {
     const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay)
     if (!TimeRemaining) {
       Swal.fire({
-        text: `You can't set meal, now.`,
+        text: `Oops! It seems you're trying to select meal outside the designated ordering hours. The meal selection service is available only from 12.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact manager +8801780242695. Thank you!`,
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },

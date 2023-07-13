@@ -41,7 +41,7 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
                                 </p>
                             ) : (
                                 <select
-                                    className={`appearance-none cursor-pointer focus:outline-none overflow-x-visible min-w-full ${name === 'Emily' ? "bg-gray-800 text-white":"bg-transparent"} px-1`}
+                                    className={`appearance-none cursor-pointer focus:outline-none overflow-visible min-w-full ${name === 'Emily' ? "bg-gray-800 text-white":"bg-transparent"} px-1`}
                                     value={matchedFilter || ""}
                                     onChange={(event) => handleChange(event, name, day)}
                                 >
