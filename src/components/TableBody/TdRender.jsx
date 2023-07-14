@@ -22,7 +22,7 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
   
     return (
         <>
-            <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName===name?"bg-ActiveCell":"bg-white"} ${activeDay?"bg-[#1B6B93]":""}`} >
+            <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName===name?"bg-ActiveCell":`${activeDay?"bg-[#1B6B93]":"bg-white"}`}` } >
                 <div data-tip={`${name} (${day})`} className="h-full flex justify-center items-center tooltip tooltip-success">
                     {isCustomCell ? (
                         <form onSubmit={(event) => handleCustomSubmit(event, name, day)}>
