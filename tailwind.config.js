@@ -13,7 +13,7 @@ export default {
         Roboto:"Roboto, sans-serif"
       },
       colors:{
-        ActiveCell:"rgb(27, 107, 147)"
+        ActiveCell:"green"
       }
     },
   },

@@ -11,7 +11,7 @@ const TableBody = () => {
   const [isCustom, setIsCustom] = useState("");
   const [AllData, setAllData] = useState();
 
-  const LoginUserName = "Sarah";
+  const LoginUserName = "Tanjimul";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,14 +120,14 @@ const TableBody = () => {
           </colgroup>
           <thead className="font-Roboto">
             <tr>
-              <th className="border bg-gray-600 text-white font-Bitter">Serial</th>
-              <th className="border bg-gray-600 text-white font-Bitter sticky left-0">Name</th>
+              <th className="border bg-gray-600 text-white font-Bitter z-50">Serial</th>
+              <th className="border bg-gray-600 text-white font-Bitter sticky left-0 z-50">Name</th>
               {Days.days.map((day) => 
               { const CellDay=  parseInt(day.day.split(" ")[1])
                 return(
                 <th
                   key={day.day}
-                  className="bg-green-600 cursor-pointer border text-center font-bold"
+                  className="bg-[#0bb00b] cursor-pointer border text-black text-center font-bold"
                 >
                   {`${day.day} ${CurrentDay===CellDay?"(Current Day)":""}`}
                 </th>
@@ -136,15 +136,15 @@ const TableBody = () => {
             </tr>
           </thead>
           <tbody>
-            {Names.users.map((name, index) => (
-              <tr key={name}>
-                <td className={`border-b border-r z-50 text-white font-Bitter 
-                ${LoginUserName===name?"bg-ActiveCell":"bg-gray-600"}`}>{index + 1}</td>
-                <td className={`w-full z-50 text-white font-Bitter sticky left-0 
-                ${LoginUserName===name?"bg-ActiveCell":"bg-gray-600 border"}`}>
-                  {name}
+            {Names.users.map((user, index) => (
+              <tr key={user.name}>
+                <td className={`border-b border-r z-30 text-white font-Bitter 
+                ${LoginUserName===user.name?"bg-ActiveCell":"bg-gray-600"}`}>{index + 1}</td>
+                <td className={`text-white font-Bitter sticky left-0 top-10 z-30
+                ${LoginUserName===user.name?"bg-ActiveCell":"bg-gray-600 border"}`}>
+                  {user.name}
                 </td>
-                {Days.days.map((day) => <TdCellRender key={name} {...{ mealTypes, isCustom, customData, name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName,CurrentDay  }}></TdCellRender>)}
+                {Days.days.map((day) => <TdCellRender key={day.day} {...{ mealTypes, isCustom, customData, name:user.name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName,CurrentDay  }}></TdCellRender>)}
               </tr>
             ))}
           </tbody>

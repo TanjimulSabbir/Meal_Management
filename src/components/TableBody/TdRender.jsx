@@ -19,10 +19,10 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
 
     const TdCellDay = parseInt(day.split(" ")[1]);
     const activeDay=TdCellDay==CurrentDay
-  
+  const activeColor= ""
     return (
         <>
-            <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName===name?"bg-ActiveCell":`${activeDay?"bg-[#1B6B93]":"bg-white"}`}` } >
+            <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName===name?"bg-ActiveCell":`${activeDay?"bg-[#405e86]":"bg-white"}`}` } >
                 <div data-tip={`${name} (${day})`} className="h-full flex justify-center items-center tooltip tooltip-success">
                     {isCustomCell ? (
                         <form onSubmit={(event) => handleCustomSubmit(event, name, day)}>
@@ -42,11 +42,11 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
                                 </p>
                             ) : (
                                 <select
-                                    className={`appearance-none cursor-pointer focus:outline-none overflow-visible min-w-full ${LoginUserName===name?"bg-ActiveCell text-white":""} px-1 ${activeDay?"bg-ActiveCell":""}`}
+                                    className={`appearance-none cursor-pointer focus:outline-none overflow-visible min-w-full text-center ${LoginUserName===name?"bg-ActiveCell text-white":"bg-transparent"} ${activeDay?"bg-ActiveCell":""}`}
                                     value={matchedFilter || ""}
                                     onChange={(event) => handleChange(event, name, day)}
                                 >
-                                    <option className="bg-green-700" value={matchedFilter || ""}>{matchedFilter}</option>
+                                    <option className="bg-black" value={matchedFilter || ""}>{matchedFilter}</option>
                                     {mealTypes.map((type) => (<option key={type} value={type}>
                                         {type}
                                     </option>
