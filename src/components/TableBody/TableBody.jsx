@@ -140,7 +140,7 @@ const TableBody = () => {
               <tr key={user.name}>
                 <td className={`border-b border-r z-30 text-white font-Bitter 
                 ${LoginUserName===user.name?"bg-Primary":"bg-gray-600"}`}>{index + 1}</td>
-                <td className={`text-white font-Bitter sticky left-0 top-10 z-30
+                <td className={`text-white font-Bitter sticky left-0 z-30
                 ${LoginUserName===user.name?"bg-Primary":"bg-gray-600 border"}`}>
                   {user.name}
                 </td>
