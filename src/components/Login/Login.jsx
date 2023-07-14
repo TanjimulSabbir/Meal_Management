@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import UserData from "../../assets/JsonFiles/Names.json"
-import NameSuggestedData from './NameSuggestedData';
+import SuggestedData from './SuggestedData';
+import RoomInput from "./RoomInput"
 
 const Login = () => {
   const [inputValue, setInputValue] = useState('');
   const [matchingData, setMatchingData] = useState([]);
   const [NameShowSuggestions, setNameShowSuggestions] = useState(false);
 
-  const handleInputChange = (e) => {
+  const NameHandleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
 
@@ -22,12 +23,10 @@ const Login = () => {
     setNameShowSuggestions(false);
   };
 
-  const handleInputBlur = () => {
-    if (inputValue === "") {
-      setNameShowSuggestions(false);
-    }
-  };
+  const NameHandleInputBlur = () => {
+    setNameShowSuggestions(false);
 
+  };
 
   return (
     <div className='h-screen w-full flex justify-center items-center'>
@@ -37,25 +36,19 @@ const Login = () => {
           <div className='relative flex flex-col space-y-[2px]'>
             <small>User Name</small>
             <input
+              name="name"
               className='placeholder:opacity-50 border-2 rounded border-green-500 bg-transparent p-1 focus:outline-green-600 placeholder:text-xs'
               type="text"
               value={inputValue}
-              onChange={handleInputChange}
-              onBlur={handleInputBlur}
+              onChange={NameHandleInputChange}
+              onBlur={NameHandleInputBlur}
               placeholder="Enter Your Name"
             />
-             {NameShowSuggestions && <NameSuggestedData {...{matchingData,handleNameClicked}}></NameSuggestedData>}
+            {NameShowSuggestions && <SuggestedData {...{ Data: matchingData, Clicked: handleNameClicked, CheckingName: "name" }}></SuggestedData>}
           </div>
           <div className='flex flex-col space-y-[2px]'>
-            <small>Room Number</small>
-            <input
-              className='placeholder:opacity-50 border-2 rounded border-green-500 bg-transparent p-1 focus:outline-green-600 placeholder:text-xs'
-              type="text"
-              value={inputValue}
-              placeholder="Enter your Room No"
-            />
+            <RoomInput></RoomInput>
           </div>
-         
         </div>
         <button type='submit' className='btn bg-green-500 w-full border font-Bitter hover:border-green-500 rounded-xl lg:hover:bg-transparent hover:text-Primary transition duration-500'>Submit</button>
       </form>

@@ -1,16 +1,16 @@
-import React from 'react'
 
-const SuggestedData = ({matchingData,handleNameClicked}) => {
+const SuggestedData = ({Data,Clicked,CheckingName}) => {
+
   return (
     <div>
         <ul className="absolute w-48 top-16 py-3 rounded-lg shadow-2xl bg-white flex flex-col z-50">
-              {matchingData.map((item, index) => (
+              {Data.map((item, index) => (
                 <li
                   key={index}
-                  onClick={() => handleNameClicked(item.name)}
+                  onClick={() => Clicked(`${item[CheckingName]}`)}
                   className="cursor-pointer hover:bg-gray-200 px-2 rounded"
                 >
-                  {item.name}
+                  {item[CheckingName]}
                 </li>
               ))}
             </ul>
@@ -18,4 +18,4 @@ const SuggestedData = ({matchingData,handleNameClicked}) => {
   )
 }
 
-export default SuggestedData
+export default SuggestedData;
