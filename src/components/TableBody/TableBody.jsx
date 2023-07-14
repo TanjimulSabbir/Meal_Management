@@ -127,7 +127,7 @@ const TableBody = () => {
                 return(
                 <th
                   key={day.day}
-                  className="bg-[#0bb00b] cursor-pointer border text-black text-center font-bold"
+                  className="bg-[green] cursor-pointer border text-black text-center font-bold"
                 >
                   {`${day.day} ${CurrentDay===CellDay?"(Current Day)":""}`}
                 </th>
@@ -139,9 +139,9 @@ const TableBody = () => {
             {Names.users.map((user, index) => (
               <tr key={user.name}>
                 <td className={`border-b border-r z-30 text-white font-Bitter 
-                ${LoginUserName===user.name?"bg-ActiveCell":"bg-gray-600"}`}>{index + 1}</td>
+                ${LoginUserName===user.name?"bg-Primary":"bg-gray-600"}`}>{index + 1}</td>
                 <td className={`text-white font-Bitter sticky left-0 top-10 z-30
-                ${LoginUserName===user.name?"bg-ActiveCell":"bg-gray-600 border"}`}>
+                ${LoginUserName===user.name?"bg-Primary":"bg-gray-600 border"}`}>
                   {user.name}
                 </td>
                 {Days.days.map((day) => <TdCellRender key={day.day} {...{ mealTypes, isCustom, customData, name:user.name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName,CurrentDay  }}></TdCellRender>)}

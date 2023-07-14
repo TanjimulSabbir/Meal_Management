@@ -13,7 +13,7 @@ export default {
         Roboto:"Roboto, sans-serif"
       },
       colors:{
-        ActiveCell:"green"
+        Primary:"#1B4D3E"
       }
     },
   },
