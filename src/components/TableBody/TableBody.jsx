@@ -6,12 +6,12 @@ import Swal from "sweetalert2";
 import TdCellRender from "./TdRender";
 
 const TableBody = () => {
-  const [mealTypes, setMealTypes] = useState(["", "Full", "Dupur", "D/M", "N/M", 0, "Custom"]);
+  const [mealTypes, setMealTypes] = useState(["Full", "Dupur", "D/M", "N/M", 0, "Custom"]);
   const [customData, setCustomData] = useState({});
   const [isCustom, setIsCustom] = useState("");
   const [AllData, setAllData] = useState();
 
-  const LoginUserName = "Tanjimul";
+  const LoginUserName = "Samit";
 
   useEffect(() => {
     const fetchData = async () => {
