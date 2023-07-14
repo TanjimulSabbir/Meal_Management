@@ -11,6 +11,8 @@ const TableBody = () => {
   const [isCustom, setIsCustom] = useState("");
   const [AllData, setAllData] = useState();
 
+  const LoginUserName = "Sarah";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,7 +35,8 @@ const TableBody = () => {
   const currentMinutes = new Date().getMinutes();
   const CurrentDay = parseInt(now.split("/")[1], 10);
 
-  const TextData=`Oops! It seems you're trying to select meal outside the designated ordering hours. The meal selection service is available only from 12.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact manager +8801780242695. Thank you!`
+  const TextData = `Oops! It seems you're trying to select meal outside the designated ordering hours. The meal selection service is available only from 12.00 AM to 10.30 PM (Current Day). Please come back during the specified hours to make your selection or contact with manager +8801780242695. Thank you!`
+  const SpecificUser='You can only select your own meal. Please choose from your available options.'
 
   const handleChange = (event, name, day) => {
     const EstimateDay = parseInt(day.split(" ")[1]);
@@ -41,8 +44,8 @@ const TableBody = () => {
     const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay)
     if (!TimeRemaining) {
       Swal.fire({
-        title:"oops!",
-       html: "<small style='color:green; text-align:justify'>" + TextData + "</small>",
+        title: "Oops!",
+        html: "<small style='color:green; text-align:justify'>" + TextData + "</small>",
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
         },
@@ -52,7 +55,20 @@ const TableBody = () => {
       });
       return;
     }
-
+    if (!(LoginUserName === name)) {
+      Swal.fire({
+        title: "Oopsie!",
+        html: "<p style='color:green; text-align:center'>" + SpecificUser + "</p>",
+        icon: 'warning',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+      return ;
+    }
     const selectedValue = event.target.value;
     if (selectedValue === "Custom") {
       setIsCustom(`${name}-${day}`);
@@ -77,7 +93,6 @@ const TableBody = () => {
       [`${name}-${day}`]: "",
     }));
   };
-
 
   const SendDataToDatabase = async (data) => {
     axios.post('http://localhost:5000/addData', data)
@@ -122,7 +137,7 @@ const TableBody = () => {
                 <td className={`border w-full z-50 bg-gray-600 text-white font-Bitter sticky left-0 ${name === "Tanjimul" && "bg-green-600"}`}>
                   {name}
                 </td>
-                {Days.days.map((day) => <TdCellRender key={name} {...{mealTypes,isCustom,customData, name, day: day.day, AllData, handleChange,handleCustomSubmit, handleEdit }}></TdCellRender>)}
+                {Days.days.map((day) => <TdCellRender key={name} {...{ mealTypes, isCustom, customData, name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName  }}></TdCellRender>)}
               </tr>
             ))}
           </tbody>

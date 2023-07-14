@@ -1,5 +1,5 @@
 
-const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, handleChange, handleCustomSubmit, handleEdit }) => {
+const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName }) => {
     const cellKey = `${name}-${day}`;
     const isCustomCell = isCustom === cellKey;
     const hasCustomData = customData[cellKey];
@@ -21,7 +21,7 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
 
     return (
         <>
-            <td key={`${name}-${day}`} className={`border font-Lora ${name === 'Emily' ? "bg-gray-800":"bg-white"}`} >
+            <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName===name ? "bg-gray-800":"bg-white"}`} >
                 <div data-tip={`${name} (${day})`} className="h-full flex justify-center items-center tooltip tooltip-success">
                     {isCustomCell ? (
                         <form onSubmit={(event) => handleCustomSubmit(event, name, day)}>
@@ -34,14 +34,14 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
                     ) : (
                         <>
                             {hasCustomData ? (
-                                <p className="flex justify-center items-center gap-1 text-white">
-                                    <span>{hasCustomData}</span>
-                                    <button className={`bg-blue-600 text-xs text-white p-1 rounded `} onClick={() => handleEdit(name, day)}> Edit
+                                <p className="flex justify-center items-center gap-1">
+                                    <span className={`min-w-full ${LoginUserName===name?"text-white":"text-black"}`}>{hasCustomData}</span>
+                                    <button className={`bg-blue-600 text-xs text-white p-1 rounded`} onClick={() => handleEdit(name, day)}> Edit
                                     </button>
                                 </p>
                             ) : (
                                 <select
-                                    className={`appearance-none cursor-pointer focus:outline-none overflow-visible min-w-full ${name === 'Emily' ? "bg-gray-800 text-white":"bg-transparent"} px-1`}
+                                    className={`appearance-none cursor-pointer focus:outline-none overflow-visible min-w-full ${LoginUserName===name ? "bg-gray-800 text-white":"bg-transparent"} px-1`}
                                     value={matchedFilter || ""}
                                     onChange={(event) => handleChange(event, name, day)}
                                 >
