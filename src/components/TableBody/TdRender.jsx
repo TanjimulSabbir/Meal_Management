@@ -37,7 +37,7 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
                             {hasCustomData ? (
                                 <p className="flex justify-center items-center gap-1">
                                     <span className={`min-w-full ${LoginUserName===name?"text-white":"text-black"}`}>{hasCustomData}</span>
-                                    <button className={`bg-green-600 text-xs text-white p-1 rounded`} onClick={() => handleEdit(name, day)}> Edit
+                                    <button className={`bg-blue-600 text-xs text-white p-1 rounded`} onClick={() => handleEdit(name, day)}> Edit
                                     </button>
                                 </p>
                             ) : (

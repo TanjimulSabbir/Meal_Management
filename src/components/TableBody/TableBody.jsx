@@ -96,16 +96,15 @@ const TableBody = () => {
       [`${name}-${day}`]: "",
     }));
   };
-
   const SendDataToDatabase = async (data) => {
-    axios.post('http://localhost:5000/addData', data)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+    try {
+      const response = await axios.post('http://localhost:5000/addData', data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   return (
     <div>
       <div className="overflow-x-auto h-screen w-full">
