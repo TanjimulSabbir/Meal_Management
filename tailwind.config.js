@@ -11,6 +11,9 @@ export default {
         Lora:"Lora, serif",
         Lato:"Lato, sans-serif",
         Roboto:"Roboto, sans-serif"
+      },
+      colors:{
+        ActiveCell:"rgb(27, 107, 147)"
       }
     },
   },

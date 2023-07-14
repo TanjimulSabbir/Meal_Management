@@ -33,28 +33,17 @@ const TableBody = () => {
   const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
   const currentHour = new Date().getHours();
   const currentMinutes = new Date().getMinutes();
-  const CurrentDay = parseInt(now.split("/")[1], 10);
+  const CurrentDay = parseInt(now.split("/")[1]);
 
-  const TextData = `Oops! It seems you're trying to select meal outside the designated ordering hours. The meal selection service is available only from 12.00 AM to 10.30 PM (Current Day). Please come back during the specified hours to make your selection or contact with manager +8801780242695. Thank you!`
+  const NextPreviousDay=(day) =>{
+    console.log(day,CurrentDay)
+    return `Oops! It seems you're trying to select meal outside the designated ordering hours/date.You can not select meal ${day > CurrentDay?"current previous-day":"current next-day"}. The meal selection service is available only current day from 12.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact with manager +8801780242695. Thank you!`}
   const SpecificUser='You can only select your own meal. Please choose from your available options.'
 
   const handleChange = (event, name, day) => {
     const EstimateDay = parseInt(day.split(" ")[1]);
     const isAllowedTime = currentHour < 23 || (currentHour === 22 && currentMinutes <= 30);
     const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay)
-    if (!TimeRemaining) {
-      Swal.fire({
-        title: "Oops!",
-        html: "<small style='color:green; text-align:justify'>" + TextData + "</small>",
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      });
-      return;
-    }
     if (!(LoginUserName === name)) {
       Swal.fire({
         title: "Oopsie!",
@@ -69,6 +58,20 @@ const TableBody = () => {
       });
       return ;
     }
+    if (!TimeRemaining) {
+      Swal.fire({
+        title: "Oops!",
+        html: "<small style='color:green; text-align:center'>" + NextPreviousDay(day) + "</small>",
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      });
+      return;
+    }
+  
     const selectedValue = event.target.value;
     if (selectedValue === "Custom") {
       setIsCustom(`${name}-${day}`);
@@ -119,25 +122,29 @@ const TableBody = () => {
             <tr>
               <th className="border bg-gray-600 text-white font-Bitter">Serial</th>
               <th className="border bg-gray-600 text-white font-Bitter sticky left-0">Name</th>
-              {Days.days.map((day) => (
+              {Days.days.map((day) => 
+              { const CellDay=  parseInt(day.day.split(" ")[1])
+                return(
                 <th
                   key={day.day}
                   className="bg-green-600 cursor-pointer border text-center font-bold"
                 >
-                  {day.day}
+                  {`${day.day} ${CurrentDay===CellDay?"(Current Day)":""}`}
                 </th>
-              ))}
+              )})}
               <td className="bg-green-600">Total Amount</td>
             </tr>
           </thead>
           <tbody>
             {Names.users.map((name, index) => (
               <tr key={name}>
-                <td className="border-b border-r z-50 bg-gray-600 text-white font-Bitter">{index + 1}</td>
-                <td className={`border w-full z-50 bg-gray-600 text-white font-Bitter sticky left-0 ${name === "Tanjimul" && "bg-green-600"}`}>
+                <td className={`border-b border-r z-50 text-white font-Bitter 
+                ${LoginUserName===name?"bg-ActiveCell":"bg-gray-600"}`}>{index + 1}</td>
+                <td className={`w-full z-50 text-white font-Bitter sticky left-0 
+                ${LoginUserName===name?"bg-ActiveCell":"bg-gray-600 border"}`}>
                   {name}
                 </td>
-                {Days.days.map((day) => <TdCellRender key={name} {...{ mealTypes, isCustom, customData, name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName  }}></TdCellRender>)}
+                {Days.days.map((day) => <TdCellRender key={name} {...{ mealTypes, isCustom, customData, name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName,CurrentDay  }}></TdCellRender>)}
               </tr>
             ))}
           </tbody>

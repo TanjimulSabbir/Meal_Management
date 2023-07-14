@@ -1,5 +1,5 @@
 
-const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName }) => {
+const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName,CurrentDay }) => {
     const cellKey = `${name}-${day}`;
     const isCustomCell = isCustom === cellKey;
     const hasCustomData = customData[cellKey];
@@ -16,12 +16,13 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
             }
         }
     })
-    console.log(matchedFilter, hasCustomData, "MatchedDays")
 
-
+    const TdCellDay = parseInt(day.split(" ")[1]);
+    const activeDay=TdCellDay==CurrentDay
+  
     return (
         <>
-            <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName===name ? "bg-gray-800":"bg-white"}`} >
+            <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName===name?"bg-ActiveCell":"bg-white"} ${activeDay?"bg-[#1B6B93]":""}`} >
                 <div data-tip={`${name} (${day})`} className="h-full flex justify-center items-center tooltip tooltip-success">
                     {isCustomCell ? (
                         <form onSubmit={(event) => handleCustomSubmit(event, name, day)}>
@@ -41,7 +42,7 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
                                 </p>
                             ) : (
                                 <select
-                                    className={`appearance-none cursor-pointer focus:outline-none overflow-visible min-w-full ${LoginUserName===name ? "bg-gray-800 text-white":"bg-transparent"} px-1`}
+                                    className={`appearance-none cursor-pointer focus:outline-none overflow-visible min-w-full ${LoginUserName===name?"bg-ActiveCell text-white":""} px-1 ${activeDay?"bg-ActiveCell":""}`}
                                     value={matchedFilter || ""}
                                     onChange={(event) => handleChange(event, name, day)}
                                 >
