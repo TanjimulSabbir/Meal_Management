@@ -1,13 +1,13 @@
-import Login from '../Login/Login'
 import TableBody from '../TableBody/TableBody'
+import TopBanner from '../TableBody/TopBanner'
 
 const Home = () => {
   return (
     <div>
-      <Login />
+     <TopBanner/>
       <TableBody />
     </div>
   )
 }
 
-export default Home
+export default Home;
