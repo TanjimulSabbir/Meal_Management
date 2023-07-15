@@ -46,7 +46,7 @@ const Login = () => {
             />
             {NameShowSuggestions && <SuggestedData {...{ Data: matchingData, Clicked: handleNameClicked, CheckingName: "name" }}></SuggestedData>}
           </div>
-          <div className='flex flex-col space-y-[2px]'>
+          <div className='relative flex flex-col space-y-[2px]'>
             <RoomInput></RoomInput>
           </div>
         </div>
