@@ -11,7 +11,8 @@ const TableBody = () => {
   const [isCustom, setIsCustom] = useState("");
   const [AllData, setAllData] = useState();
 
-  const LoginUserName = "Samit";
+  const LocalData = JSON.parse(localStorage.getItem("UserLoginData"))
+  const LoginUserName = LocalData.name;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,10 +36,11 @@ const TableBody = () => {
   const currentMinutes = new Date().getMinutes();
   const CurrentDay = parseInt(now.split("/")[1]);
 
-  const NextPreviousDay=(day) =>{
-    console.log(day,CurrentDay)
-    return `Oops! It seems you're trying to select meal outside the designated ordering hours/date.You can not select meal ${day > CurrentDay?"current previous-day":"current next-day"}. The meal selection service is available only current day from 12.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact with manager +8801780242695. Thank you!`}
-  const SpecificUser='You can only select your own meal. Please choose from your available options.'
+  const NextPreviousDay = (day) => {
+    console.log(day, CurrentDay)
+    return `Oops! It seems you're trying to select meal outside the designated ordering hours/date.You can not select meal ${day > CurrentDay ? "current previous-day" : "current next-day"}. The meal selection service is available only current day from 12.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact with manager +8801780242695. Thank you!`
+  }
+  const SpecificUser = 'You can only select your own meal. Please choose from your available options.'
 
   const handleChange = (event, name, day) => {
     const EstimateDay = parseInt(day.split(" ")[1]);
@@ -56,7 +58,7 @@ const TableBody = () => {
           popup: 'animate__animated animate__fadeOutUp'
         }
       });
-      return ;
+      return;
     }
     if (!TimeRemaining) {
       Swal.fire({
@@ -71,7 +73,7 @@ const TableBody = () => {
       });
       return;
     }
-  
+
     const selectedValue = event.target.value;
     if (selectedValue === "Custom") {
       setIsCustom(`${name}-${day}`);
@@ -104,7 +106,7 @@ const TableBody = () => {
       console.log(error);
     }
   };
-  
+
   return (
     <div>
       <div className="overflow-x-auto h-screen w-full">
@@ -121,16 +123,17 @@ const TableBody = () => {
             <tr>
               <th className="border bg-gray-600 text-white font-Bitter z-50">Serial</th>
               <th className="border bg-gray-600 text-white font-Bitter sticky left-0 z-50">Name</th>
-              {Days.days.map((day) => 
-              { const CellDay=  parseInt(day.day.split(" ")[1])
-                return(
-                <th
-                  key={day.day}
-                  className="bg-[green] cursor-pointer border text-black text-center font-bold"
-                >
-                  {`${day.day} ${CurrentDay===CellDay?"(Current Day)":""}`}
-                </th>
-              )})}
+              {Days.days.map((day) => {
+                const CellDay = parseInt(day.day.split(" ")[1])
+                return (
+                  <th
+                    key={day.day}
+                    className="bg-[green] cursor-pointer border text-black text-center font-bold"
+                  >
+                    {`${day.day} ${CurrentDay === CellDay ? "(Current Day)" : ""}`}
+                  </th>
+                )
+              })}
               <td className="bg-green-600">Total Amount</td>
             </tr>
           </thead>
@@ -138,12 +141,12 @@ const TableBody = () => {
             {Names.users.map((user, index) => (
               <tr key={user.name}>
                 <td className={`border-b border-r z-30 text-white font-Bitter 
-                ${LoginUserName===user.name?"bg-Primary":"bg-gray-600"}`}>{index + 1}</td>
+                ${LoginUserName === user.name ? "bg-Primary" : "bg-gray-600"}`}>{index + 1}</td>
                 <td className={`text-white font-Bitter sticky left-0 z-30
-                ${LoginUserName===user.name?"bg-Primary":"bg-gray-600 border"}`}>
+                ${LoginUserName === user.name ? "bg-Primary" : "bg-gray-600 border"}`}>
                   {user.name}
                 </td>
-                {Days.days.map((day) => <TdCellRender key={day.day} {...{ mealTypes, isCustom, customData, name:user.name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName,CurrentDay  }}></TdCellRender>)}
+                {Days.days.map((day) => <TdCellRender key={day.day} {...{ mealTypes, isCustom, customData, name: user.name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit, LoginUserName, CurrentDay }}></TdCellRender>)}
               </tr>
             ))}
           </tbody>

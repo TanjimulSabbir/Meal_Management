@@ -14,10 +14,10 @@ const Login = () => {
     }
     localStorage.removeItem("UserLoginData");
     const SetLocalData = localStorage.setItem("UserLoginData", JSON.stringify({ name, room }))
-    if (!SetLocalData) {
-      return navigate("/login");
-    }
-    navigate('/home');
+    // if (!SetLocalData) {
+    //   return navigate("/login");
+    // }
+   return navigate('/meal-counter');
   }
 
   return (
