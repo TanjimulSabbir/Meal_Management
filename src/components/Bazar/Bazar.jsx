@@ -20,6 +20,7 @@ const Bazar = ({ setBazarShow }) => {
             <button className="btn" ref={buttonRef} onClick={() => window.Bazar.showModal()}></button>
             <dialog id="Bazar" className="modal">
                 <form method="dialog" className="modal-box w-11/12 max-w-5xl">
+                <h1 className='text-3xl font-bold font-Lora text-center pt-2 pb-3'>All Details (July, 2023)</h1>
                     <div className="overflow-x-visible">
                         <table className="table table-zebra table-xs lg:table-md">
                             {/* head */}
@@ -42,7 +43,7 @@ const Bazar = ({ setBazarShow }) => {
                                         <tbody>
                                             {/* row 1 */}
                                             <tr>
-                                                <td className={`${CellStyle}`}>{index + 1}</td>
+                                                <td className={`${CellStyle} ${BazarDay < CurrentDay ? "bg-teal-500 font-bold" : "bg-green-500"} rounded`}>{index + 1}</td>
                                                 <td className={`${CellStyle}  ${BazarDay < CurrentDay ? "bg-teal-500 font-bold" : "bg-green-500"} rounded`}>{user.name}</td>
                                                 <td className={`${CellStyle} ${BazarDay < CurrentDay ? "bg-teal-500" : "bg-green-500"} rounded`}>{user.bazar}</td>
                                                 <td className={`${CellStyle}`}></td>
