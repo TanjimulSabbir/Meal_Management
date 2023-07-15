@@ -2,14 +2,15 @@ import React from 'react'
 
 const TopBanner = () => {
   return (
-    <div className='pt-10 pb-16 font-Bitter bg-sky-100'>
+    <div className='pt-10 pb-5 font-Bitter bg-sky-100'>
      <div className='text-center'>
      <h1 className='text-3xl lg:text-4xl'>Rangon House</h1>
       <p className='mt-4'>July, 20233</p>
+      
      </div>
      
       {/* Rules and Regulation */}
-      <div className='w-1/2 mx-auto'>
+      <div className='md:w-1/2 flex items-center justify-center'>
         <div className="collapse">
           <input type="checkbox" className="peer" />
           <div className="collapse-title peer-checked:text-black text-center">
