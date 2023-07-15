@@ -1,11 +1,12 @@
-import TableBody from '../TableBody/TableBody'
-import TopBanner from '../TableBody/TopBanner'
+import TableBody from '../Table/TableBody'
+import TopBanner from '../Table/TopBanner'
 
 const Home = () => {
+
   return (
     <div>
-      <TopBanner />
-      <TableBody />
+      <TopBanner/>
+      <TableBody/>
     </div>
   )
 }

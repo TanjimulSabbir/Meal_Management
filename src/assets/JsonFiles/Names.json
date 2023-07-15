@@ -1,29 +1,155 @@
 {
   "users": [
-    { "name": "Arafat(Finance)", "room": 101 },
-    { "name": "Sazzad", "room": 101 },
-    { "name": "Rummon", "room": 101 },
-    { "name": "Usuf Vai", "room": 103 },
-    { "name": "Abir", "room": 103 },
-    { "name": "Sajedul", "room": 104 },
-    { "name": "Utsho", "room": 105 },
-    { "name": "Sadhin", "room": 105 },
-    { "name": "Sklain Vai", "room": 107 },
-    { "name": "Ahsan", "room": 107 },
-    { "name": "Tanjimul", "room": 407 },
-    { "name": "Samit", "room": 407 },
-    { "name": "Tonmoy Vai", "room": 406 },
-    { "name": "Opu", "room": 406 },
-    { "name": "Asif (Finance)", "room": 405 },
-    { "name": "Mahmud", "room": 405 },
-    { "name": "Mintu", "room": 404 },
-    { "name": "Sanwar", "room": 404 },
-    { "name": "Kader Vai", "room": 403 },
-    { "name": "Maruf", "room": 402 },
-    { "name": "Asif (Market)", "room": 401 },
-    { "name": "Abid", "room": 410 },
-    { "name": "Niloy", "room": 409 },
-    { "name": "Nibir", "room": 409 },
-    { "name": "Arafat (Arobic)", "room": 406 }
+    {
+      "name": "Arafat(Finance)",
+      "room": 101,
+      "bazar": ""
+    },
+    {
+      "name": "Sazzad",
+      "room": 101,
+      "bazar": "20, July 2023"
+    },
+    {
+      "name": "Rummon",
+      "room": 101,
+      "bazar": "16, July 2023"
+    },
+    {
+      "name": "Usuf Vai",
+      "room": 103,
+      "bazar": "14, July 2023"
+    },
+    {
+      "name": "Abir",
+      "room": 103,
+      "bazar": ""
+    },
+    {
+      "name": "Sajedul",
+      "room": 104,
+      "bazar": "13, July 2023"
+    },
+    {
+      "name": "Utsho",
+      "room": 105,
+      "bazar": "30, July 2023"
+    },
+    {
+      "name": "Sadhin",
+      "room": 105,
+      "bazar": "11, July 2023"
+    },
+    {
+      "name": "Sklain Vai",
+      "room": 107,
+      "bazar": "N/A"
+    },
+    {
+      "name": "Ahsan",
+      "room": 107,
+      "bazar": "23, July 2023"
+    },
+    {
+      "name": "Tanjimul",
+      "room": 407,
+      "bazar": "18, July 2023"
+    },
+    {
+      "name": "Samit",
+      "room": 407,
+      "bazar": "10, July 2023"
+    },
+    {
+      "name": "Tonmoy Vai",
+      "room": 406,
+      "bazar": "21, July 2023"
+    },
+    {
+      "name": "Opu",
+      "room": 406,
+      "bazar": "15, July 2023"
+    },
+    {
+      "name": "Asif (Finance)",
+      "room": 405,
+      "bazar": "22, July 2023"
+    },
+    {
+      "name": "Mahmud",
+      "room": 405,
+      "bazar": "17, July 2023"
+    },
+    {
+      "name": "Mintu",
+      "room": 404,
+      "bazar": ""
+    },
+    {
+      "name": "Sanwar",
+      "room": 404,
+      "bazar": "19, July 2023"
+    },
+    {
+      "name": "Kader Vai",
+      "room": 403,
+      "bazar": "12, July 2023"
+    },
+    {
+      "name": "Maruf",
+      "room": 402,
+      "bazar": "28, July 2023"
+    },
+    {
+      "name": "Asif (Market)",
+      "room": 401,
+      "bazar": "09, July 2023"
+    },
+    {
+      "name": "Abid",
+      "room": 410,
+      "bazar": "29, July 2023"
+    },
+    {
+      "name": "Niloy",
+      "room": 409,
+      "bazar": ""
+    },
+    {
+      "name": "Nibir",
+      "room": 409,
+      "bazar": ""
+    },
+    {
+      "name": "Arafat (Arobic)",
+      "room": 406,
+      "bazar": ""
+    }
+    ,
+    {
+      "name": "",
+      "room": 406,
+      "bazar": ""
+    },
+    {
+      "name": "",
+      "room": 406,
+      "bazar": ""
+    },
+    {
+      "name": "",
+      "room": 406,
+      "bazar": ""
+    },
+    {
+      "name": "",
+      "room": 406,
+      "bazar": ""
+    },
+    {
+      "name": "",
+      "room": 406,
+      "bazar": ""
+    }
   ]
 }
