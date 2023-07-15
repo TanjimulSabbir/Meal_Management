@@ -6,7 +6,7 @@ const TopBanner = () => {
   return (
     <div className='pt-10 pb-5 font-Bitter bg-sky-100'>
       <div className='text-center'>
-        <h1 className='text-lg md:text-3xl lg:text-4xl'>Rangon House</h1>
+        <h1 className='text-2xl md:text-3xl lg:text-4xl'>Rangon House</h1>
       <div className='flex gap-5 items-center justify-center mt-2'>  <p className=''>July, 2023</p>
         <p className="bg-transparent cursor-pointer text-green-600" onClick={() => setBazarShow(true)}>Show Details</p></div>
       </div>
