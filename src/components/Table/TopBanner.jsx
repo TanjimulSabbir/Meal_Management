@@ -4,7 +4,7 @@ import Bazar from '../Bazar/Bazar';
 const TopBanner = () => {
   const [ShowBazar, setBazarShow] = useState(false);
   return (
-    <div className='pt-10 pb-5 font-Bitter bg-sky-100'>
+    <div className='pt-10 font-Bitter bg-sky-100'>
       <div className='text-center'>
         <h1 className='text-2xl md:text-3xl lg:text-4xl'>Rangon House</h1>
       <div className='flex gap-5 items-center justify-center mt-2'>  <p className=''>July, 2023</p>
