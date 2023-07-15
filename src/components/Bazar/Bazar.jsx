@@ -20,8 +20,8 @@ const Bazar = ({ setBazarShow }) => {
             <button className="btn" ref={buttonRef} onClick={() => window.Bazar.showModal()}></button>
             <dialog id="Bazar" className="modal">
                 <form method="dialog" className="modal-box w-11/12 max-w-5xl">
-                <h1 className='text-xl lg:text-3xl font-bold font-Lora text-center pt-2 pb-3'>All Details (July, 2023)</h1>
-                    <div className="overflow-visible">
+                <h1 className='text-xl lg:text-3xl font-bold font-Lora text-center fixed top-5 inset-0'>All Details (July, 2023)</h1>
+                    <div className="overflow-visible mt-14">
                         <table className="table table-zebra table-xs lg:table-md">
                             {/* head */}
                             <thead>
