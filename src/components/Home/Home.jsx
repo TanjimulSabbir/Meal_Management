@@ -4,7 +4,7 @@ import TopBanner from '../Table/TopBanner'
 const Home = () => {
 
   return (
-    <div>
+    <div className="pb-10">
       <TopBanner/>
       <TableBody/>
     </div>

@@ -6,15 +6,15 @@ const TopBanner = () => {
   return (
     <div className='pt-10 pb-5 font-Bitter bg-sky-100'>
       <div className='text-center'>
-        <h1 className='text-3xl lg:text-4xl'>Rangon House</h1>
-        <p className='mt-4'>July, 20233</p>
-        <button className="btn bg-transparent mt-1" onClick={() => setBazarShow(true)}>Show Details</button>
+        <h1 className='text-lg md:text-3xl lg:text-4xl'>Rangon House</h1>
+      <div className='flex gap-5 items-center justify-center mt-2'>  <p className=''>July, 2023</p>
+        <p className="bg-transparent cursor-pointer text-green-600" onClick={() => setBazarShow(true)}>Show Details</p></div>
       </div>
       {/* Rules and Regulation */}
       <div className='md:w-1/2 mx-auto'>
         <div className="collapse">
           <input type="checkbox" className="peer" />
-          <div className="collapse-title peer-checked:text-black text-center">
+          <div className="collapse-title peer-checked:text-green-600 text-green-600 text-center">
             See Meal Selection Rules and Regulation!
           </div>
           <div className="collapse-content rounded-2xl text-justify peer-checked:text-black">
