@@ -28,7 +28,7 @@ const Bazar = ({ setBazarShow }) => {
                                 <tr>
                                     <th className={HeadStyle}>Serial</th>
                                     <th className={HeadStyle}>Name</th>
-                                    <th className={HeadStyle}>Bazar Date</th>
+                                    <th className={HeadStyle}> Bazar Date </th>
                                     <th className={HeadStyle}>Given Amount</th>
                                     <th className={HeadStyle}>Total Expenses</th>
                                     <th className={HeadStyle}>You Pay</th>
