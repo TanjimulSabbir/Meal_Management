@@ -18,7 +18,9 @@ function RoomInput() {
        }else{
         setMatchingRoomData(matchedRoomData);
        }
+       if(inputValue){
         setRoomShowSuggestions(true);
+       }
         console.log(matchedRoomData)
     };
 
@@ -46,10 +48,10 @@ function RoomInput() {
             />
             {/* {roomShowSuggestions && <SuggestedData {...{ Data: matchingRoomData, CheckingName: "room",setInputValue }} />} */}
             <ul className={`absolute w-48 top-16 py-3 rounded-lg shadow-2xl bg-white flex flex-col z-50 `}>
-              {matchingRoomData.map((item, index) => (
+              {roomShowSuggestions && matchingRoomData.map((item, index) => (
                 <li
                   key={index}
-                  onClick={()=>handleRoomClicked(`${item.room}`)}
+                  onClick={()=>handleRoomClicked(item.room)}
                   className="cursor-pointer hover:bg-gray-200 px-2 rounded"
                 >
                   {item.room}
