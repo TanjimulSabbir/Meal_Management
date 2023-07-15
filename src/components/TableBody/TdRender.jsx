@@ -19,7 +19,7 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
 
     const TdCellDay = parseInt(day.split(" ")[1]);
     const activeDay=TdCellDay==CurrentDay
-  const activeColor= ""
+
     return (
         <>
             <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName===name?"bg-Primary":`${activeDay?"bg-blue-100":"bg-white"}`}` } >

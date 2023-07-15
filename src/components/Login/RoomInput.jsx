@@ -37,6 +37,7 @@ function RoomInput() {
             <small>Room Number</small>
             <input
                 className={`placeholder:opacity-50 border-2 rounded border-green-500 bg-transparent p-1 focus:outline-green-600 placeholder:text-xs`}
+                name='room'
                 type="text"
                 value={inputValue}
                 onChange={roomHandleInputChange}
