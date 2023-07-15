@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import NameInput from "./NameInput";
 import RoomInput from "./RoomInput"
+import UserInfo from "../../assets/JsonFiles/Names.json"
+import Swal from "sweetalert2";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,15 +11,28 @@ const Login = () => {
     event.preventDefault();
     const name = event.target.name.value;
     const room = event.target.room.value;
+
     if (!(name && room)) {
       return;
     }
+    const LoginCheck = UserInfo.users.find(user => user.name == name && user.room == room);
+    const admin =  UserInfo.users.find(user => name == "Tanjim25" && user.room == room);
+    console.log(name,admin,room)
+    if (!admin) {
+      if (!LoginCheck) {
+        Swal.fire({ position: 'center', icon: 'info', text: 'Login failed!', showConfirmButton: false, timer: 1500 })
+        return;
+      }
+    }
     localStorage.removeItem("UserLoginData");
-    const SetLocalData = localStorage.setItem("UserLoginData", JSON.stringify({ name, room }))
-    // if (!SetLocalData) {
-    //   return navigate("/login");
-    // }
-   return navigate('/meal-counter');
+    localStorage.setItem("UserLoginData", JSON.stringify({ name, room }));
+    if (admin) {
+      Swal.fire({ position: 'center', icon: 'success', text: 'Admin Login successful!', showConfirmButton: false, timer: 1500 });
+      return navigate('/meal-counter');
+    }
+    Swal.fire({ position: 'center', icon: 'success', text: 'Login successful!', showConfirmButton: false, timer: 1500 });
+
+    return navigate('/meal-counter');
   }
 
   return (
