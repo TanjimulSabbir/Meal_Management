@@ -14,7 +14,7 @@ const Footer = () => {
                     <Link className="link link-hover">Press kit</Link>
                 </div> */}
 
-                    <div className=''>
+                    <div className='px-2'>
                         <div className='text-xs'>
                             <p>Copyright © 2023 - All rights reserved by Rangon House. 
                             <small>
