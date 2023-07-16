@@ -15,8 +15,9 @@ const Footer = () => {
                 </div> */}
 
                     <div className=''>
-                        <div>
-                            <p>Copyright © 2023 - All rights reserved by Rangon House. <small>
+                        <div className='text-xs'>
+                            <p>Copyright © 2023 - All rights reserved by Rangon House. 
+                            <small>
                             Developed by <Link className='text-green-500' to="https://github.com/TanjimulSabbir" target='_blank'>Tanjimul Islam Sabbir.</Link>
                             </small>
                             </p>
