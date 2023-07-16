@@ -16,11 +16,11 @@ const Footer = () => {
 
                     <div className='px-2'>
                         <div className='text-xs'>
-                            <p>Copyright © 2023 - All rights reserved by Rangon House. 
-                            <small>
+                            <p>Copyright © 2023 - All rights reserved by Rangon House</p>
+                        </div>
+                        <small>
                             Developed by <Link className='text-green-500' to="https://github.com/TanjimulSabbir" target='_blank'>Tanjimul Islam Sabbir.</Link>
                             </small>
-                            </p>
                             <div className='flex justify-center items-center space-x-2'>
                                 <Link className='list-none text-xs text-white' to="https://github.com/TanjimulSabbir"><FiGithub /> </Link>
                                 <Link className='list-none text-xs text-white' to="/https://www.linkedin.com/in/TanjimulSabbir"><FiLinkedin /> </Link>
@@ -28,8 +28,6 @@ const Footer = () => {
 
                                 <Link className='list-none text-xs text-white' to="/https://www.discord.com/tanjimulsabbir"><  BsDiscord /> </Link>
                             </div>
-                        </div>
-                      
                     </div>
                 </div>
             </footer>
