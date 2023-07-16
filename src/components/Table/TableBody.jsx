@@ -34,22 +34,23 @@ const TableBody = () => {
   const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
   const currentHour = new Date().getHours();
   const currentMinutes = new Date().getMinutes();
-  const CurrentDay = parseInt(now.split("/")[1]);
+  const CurrentDate = parseInt(now.split("/")[1]);
 
   const NextPreviousDay = (day) => {
-    const SpliteDay = parseInt(day.split(" ")[1])
-    console.log({ SpliteDay, CurrentDay })
-    return `Oops! It seems you're trying to select meal outside the designated ordering hours/date. You can not select meal ${SpliteDay < CurrentDay ? "Current Previous-Day" : "Current Next-Day"}. The meal selection service is available only current day from 12.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact with manager +8801780242695. Thank you!`
+    const SpliteDay = parseInt(day.split(",")[1])
+    console.log({ SpliteDay, CurrentDate })
+    return `Oops! It seems you're trying to select meal outside the designated ordering hours/date. You can not select meal ${SpliteDay < CurrentDate ? "Current Previous-Day" : "Current Next-Day"}. The meal selection service is available only current day from 12.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact with manager +8801780242695. Thank you!`
   }
   const SpecificUser = 'You can only select your own meal. Please choose from your available options.'
 
   const handleChange = (event, name, day) => {
-    const EstimateDay = parseInt(day.split(" ")[1]);
+    const EstimateDate = parseInt(day.split(",")[1]);
     const isAllowedTime = currentHour < 23 || (currentHour === 22 && currentMinutes <= 30);
-    const TimeRemaining = (isAllowedTime && EstimateDay == CurrentDay);
+    const TimeRemaining = (isAllowedTime && (EstimateDate - CurrentDate) == 1);
+
+    console.log(((EstimateDate - CurrentDate) === 1), "EstimateDate, CurrentDate")
 
     if (!(LoginUserName === "Tanjim25")) {
-
       if (!(LoginUserName === name)) {
         Swal.fire({ title: "Oopsie!", html: "<p style='color:green; text-align:center'>" + SpecificUser + "</p>", icon: 'warning', showClass: { popup: 'animate__animated animate__fadeInDown' }, hideClass: { popup: 'animate__animated animate__fadeOutUp' } });
         return;
@@ -109,13 +110,13 @@ const TableBody = () => {
               <th className="border bg-gray-600 text-white font-Bitter z-50">Serial</th>
               <th className="border bg-gray-600 text-white font-Bitter sticky left-0 z-50">Name</th>
               {Days.days.map((day) => {
-                const CellDay = parseInt(day.day.split(" ")[1])
+                const CellDay = parseInt(day.day.split(",")[1])
                 return (
                   <th
                     key={day.day}
                     className="bg-[green] cursor-pointer border text-black text-center font-bold"
                   >
-                    {`${day.day} ${CurrentDay === CellDay ? "(Current Day)" : ""}`}
+                    {`${day.day} ${((CellDay - CurrentDate) == 1) ? "(Bazar Day)" : ""}`}
                   </th>
                 )
               })}
@@ -131,7 +132,7 @@ const TableBody = () => {
                 ${LoginUserName === user.name ? "bg-Primary" : "bg-gray-600 border"}`}>
                   {user.name}
                 </td>
-                {Days.days.map((day) => <TdCellRender key={day.day} {...{ mealTypes, isCustom, customData, name: user.name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit, LoginUserName, CurrentDay }}></TdCellRender>)}
+                {Days.days.map((day) => <TdCellRender key={day.day} {...{ mealTypes, isCustom, customData, name: user.name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit, LoginUserName, CurrentDate }}></TdCellRender>)}
               </tr>
             ))}
           </tbody>

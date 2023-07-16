@@ -10,7 +10,7 @@ const Bazar = ({ setBazarShow }) => {
         }
     }, []);
     const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
-    const CurrentDay = parseInt(now.split("/")[1]);
+    const CurrentDate = parseInt(now.split("/")[1]);
 
     const HeadStyle = "border border-black text-black text-center font-bold bg-green-500"
     const CellStyle = "border border-black text-black"
@@ -43,15 +43,15 @@ const Bazar = ({ setBazarShow }) => {
                                         <tbody>
                                             {/* row 1 */}
                                             <tr>
-                                                <td className={`${CellStyle} ${BazarDay < CurrentDay ? "bg-green-500 font-bold" : "bg-white"} rounded`}>{index + 1}</td>
-                                                <td className={`${CellStyle}  ${BazarDay < CurrentDay ? "bg-green-500 font-bold" : "bg-white"} rounded`}>{user.name}</td>
-                                                <td className={`${CellStyle} ${BazarDay < CurrentDay ? "bg-green-500 font-bold" : "bg-white"} rounded min-w-[100px]`}>{user.bazar}</td>
+                                                <td className={`${CellStyle} ${BazarDay < CurrentDate ? "bg-green-500 font-bold" : "bg-white"} rounded`}>{index + 1}</td>
+                                                <td className={`${CellStyle}  ${BazarDay < CurrentDate ? "bg-green-500 font-bold" : "bg-white"} rounded`}>{user.name}</td>
+                                                <td className={`${CellStyle} ${BazarDay < CurrentDate ? "bg-green-500 font-bold" : "bg-white"} rounded min-w-[100px]`}>{user.bazar}</td>
                                                 <td className={`${CellStyle}`}></td>
                                                 <td className={`${CellStyle}`}></td>
                                                 <td className={`${CellStyle}`}></td>
                                                 <td className={`${CellStyle}`}></td>
                                                 <td className={`${CellStyle}`}>
-                                                    {BazarDay < CurrentDay ? <span className='font-bold'>Bazar Done</span>:BazarDay===CurrentDay?<strong className='text-green-600'>Vibrantly Ongoing</strong>:""}
+                                                    {BazarDay < CurrentDate ? <span className='font-bold'>Bazar Done</span>:BazarDay===CurrentDate?<strong className='text-green-600'>Vibrantly Ongoing</strong>:""}
                                                 </td>
                                             </tr>
                                         </tbody>

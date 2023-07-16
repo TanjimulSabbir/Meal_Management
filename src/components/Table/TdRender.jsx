@@ -1,5 +1,5 @@
 
-const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, handleChange, handleCustomSubmit, handleEdit,LoginUserName,CurrentDay }) => {
+const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, handleChange, handleCustomSubmit, handleEdit, LoginUserName, CurrentDate }) => {
     const cellKey = `${name}-${day}`;
     const isCustomCell = isCustom === cellKey;
     const hasCustomData = customData[cellKey];
@@ -17,12 +17,12 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
         }
     })
 
-    const TdCellDay = parseInt(day.split(" ")[1]);
-    const activeDay=TdCellDay==CurrentDay
+    const TdCellDay = parseInt(day.split(",")[1]);
+    const activeDay = ((TdCellDay - CurrentDate) == 1)
 
     return (
         <>
-            <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName===name?"bg-Primary":`${activeDay?"bg-blue-100":"bg-white"}`}` } >
+            <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName === name ? "bg-Primary" : `${activeDay ? "bg-blue-100" : "bg-white"}`}`} >
                 <div data-tip={`${name} (${day})`} className="h-full flex justify-center items-center tooltip tooltip-success">
                     {isCustomCell ? (
                         <form onSubmit={(event) => handleCustomSubmit(event, name, day)}>
@@ -36,13 +36,13 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
                         <>
                             {hasCustomData ? (
                                 <p className="flex justify-center items-center gap-1">
-                                    <span className={`min-w-full ${LoginUserName===name?"text-white":"text-black"}`}>{hasCustomData}</span>
+                                    <span className={`min-w-full ${LoginUserName === name ? "text-white" : "text-black"}`}>{hasCustomData}</span>
                                     <button className={`bg-blue-600 text-xs text-white p-1 rounded`} onClick={() => handleEdit(name, day)}> Edit
                                     </button>
                                 </p>
                             ) : (
                                 <select
-                                    className={`appearance-none cursor-pointer focus:outline-none overflow-visible min-w-full text-center ${LoginUserName===name?"bg-Primary text-white": `${activeDay?"bg-blue-100":"bg-white"}`} `}
+                                    className={`appearance-none cursor-pointer focus:outline-none overflow-visible min-w-full text-center ${LoginUserName === name ? "bg-Primary text-white" : `${activeDay ? "bg-blue-100" : "bg-white"}`} `}
                                     value={matchedFilter || ""}
                                     onChange={(event) => handleChange(event, name, day)}
                                 >
