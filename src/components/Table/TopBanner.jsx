@@ -15,8 +15,8 @@ const TopBanner = () => {
       showCancelButton: true,
       confirmButtonText: 'Yes, Logout!'
     }).then((result) => {
-      localStorage.removeItem("UserLoginData")
       if (result.isConfirmed) {
+        localStorage.removeItem("UserLoginData")
         Swal.fire({ position: 'center', icon: 'success', text: 'Log out successful!', showConfirmButton: false, timer: 1500 });
         return navigate("/login");
       }

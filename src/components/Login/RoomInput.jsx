@@ -3,7 +3,7 @@ import UserData from "../../assets/JsonFiles/Names.json"
 
 
 function RoomInput() {
-    const [inputValue, setInputValue] = useState(101);
+    const [inputValue, setInputValue] = useState(null);
     const [matchingRoomData, setMatchingRoomData] = useState([]);
     const [roomShowSuggestions, setRoomShowSuggestions] = useState(false);
 

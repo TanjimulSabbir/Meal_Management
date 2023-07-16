@@ -16,8 +16,8 @@ const Login = () => {
       return;
     }
     const LoginCheck = UserInfo.users.find(user => user.name == name && user.room == room);
-    const admin =  UserInfo.users.find(user => name == "Tanjim25" && user.room == room);
-    console.log(name,admin,room)
+    const admin = UserInfo.users.find(user => name == "Tanjim25" && user.room == room);
+    //  if admin false, then check normal. otherwise admin true, then no name or time checked, directly go to data access.
     if (!admin) {
       if (!LoginCheck) {
         Swal.fire({ position: 'center', icon: 'info', text: 'Login failed!', showConfirmButton: false, timer: 1500 })
@@ -26,12 +26,14 @@ const Login = () => {
     }
     localStorage.removeItem("UserLoginData");
     localStorage.setItem("UserLoginData", JSON.stringify({ name, room }));
+    // for admin login
     if (admin) {
       Swal.fire({ position: 'center', icon: 'success', text: 'Admin Login successful!', showConfirmButton: false, timer: 1500 });
       return navigate('/meal-counter');
     }
+    // normal login
     Swal.fire({ position: 'center', icon: 'success', text: 'Login successful!', showConfirmButton: false, timer: 1500 });
-
+    window.location.reload()
     return navigate('/meal-counter');
   }
 
