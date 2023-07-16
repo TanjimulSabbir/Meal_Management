@@ -3,35 +3,15 @@ import Bazar from '../Bazar/Bazar';
 
 const TopBanner = () => {
   const [ShowBazar, setBazarShow] = useState(false);
-  const AutoLocalStorageDelete = () => {
-    // Set the value in local storage
-    localStorage.setItem('myData', 'myValue');
-
-    // Define the duration after which you want to delete the data (e.g., 3 hours)
-    const durationInHours = 10;
-    const durationInMilliseconds = durationInHours;
-
-    // Get the timestamp when the data was initially set
-    const startTime = new Date().getTime();
-
-    // Set an interval to periodically check the elapsed time and delete the data
-    const interval = setInterval(() => {
-      const currentTime = new Date().getTime();
-      const elapsedTime = currentTime - startTime;
-
-      if (elapsedTime >= durationInMilliseconds) {
-        localStorage.removeItem('myData'); // Remove the specific item from local storage
-        clearInterval(interval); // Stop the interval once the data is deleted
-      }
-    }, 600); // Check every minute (adjust the interval duration as needed)
-  }
-  AutoLocalStorageDelete();
+  const UserData = JSON.parse(localStorage.getItem("UserLoginData"));
   return (
     <div className='pt-10 font-Bitter bg-sky-100'>
       <div className='text-center'>
-        <h1 className='text-2xl md:text-3xl lg:text-4xl'>Rangon House</h1>
+        <h1 className='text-2xl md:text-3xl lg:text-4xl'>Rangon House</h1> 
         <div className='flex gap-5 items-center justify-center mt-2'>  <p className=''>July, 2023</p>
-          <p className="bg-transparent cursor-pointer text-green-600" onClick={() => setBazarShow(true)}>Show Details</p></div>
+          <p className="bg-transparent cursor-pointer text-green-600" onClick={() => setBazarShow(true)}>Show Details</p> 
+          <p className="tooltip" data-tip={`${UserData.name} (${UserData.room})`}>Login Info</p>
+          </div>
       </div>
       {/* Rules and Regulation */}
       <div className='md:w-1/2 mx-auto'>

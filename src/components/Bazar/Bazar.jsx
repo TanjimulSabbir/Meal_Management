@@ -45,13 +45,13 @@ const Bazar = ({ setBazarShow }) => {
                                             <tr>
                                                 <td className={`${CellStyle} ${BazarDay < CurrentDay ? "bg-green-500 font-bold" : "bg-white"} rounded`}>{index + 1}</td>
                                                 <td className={`${CellStyle}  ${BazarDay < CurrentDay ? "bg-green-500 font-bold" : "bg-white"} rounded`}>{user.name}</td>
-                                                <td className={`${CellStyle} ${BazarDay < CurrentDay ? "bg-green-500" : "bg-white"} rounded min-w-[100px]`}>{user.bazar}</td>
+                                                <td className={`${CellStyle} ${BazarDay < CurrentDay ? "bg-green-500 font-bold" : "bg-white"} rounded min-w-[100px]`}>{user.bazar}</td>
                                                 <td className={`${CellStyle}`}></td>
                                                 <td className={`${CellStyle}`}></td>
                                                 <td className={`${CellStyle}`}></td>
                                                 <td className={`${CellStyle}`}></td>
                                                 <td className={`${CellStyle}`}>
-                                                    {BazarDay < CurrentDay ? <span className='font-bold'>Bazar Done</span>:""}
+                                                    {BazarDay < CurrentDay ? <span className='font-bold'>Bazar Done</span>:BazarDay===CurrentDay?<strong className='text-green-600'>Vibrantly Ongoing</strong>:""}
                                                 </td>
                                             </tr>
                                         </tbody>
