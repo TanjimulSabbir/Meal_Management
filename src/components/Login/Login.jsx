@@ -33,7 +33,6 @@ const Login = () => {
     }
     // normal login
     Swal.fire({ position: 'center', icon: 'success', text: 'Login successful!', showConfirmButton: false, timer: 1500 });
-    window.location.reload()
     return navigate('/meal-counter');
   }
 
