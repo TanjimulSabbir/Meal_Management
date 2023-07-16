@@ -1,3 +1,4 @@
+import Footer from '../Footer/Footer';
 import TableBody from '../Table/TableBody'
 import TopBanner from '../Table/TopBanner'
 
@@ -7,6 +8,7 @@ const Home = () => {
     <div>
       <TopBanner/>
       <TableBody/>
+      <Footer/>
     </div>
   )
 }

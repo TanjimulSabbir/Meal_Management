@@ -13,7 +13,8 @@ export default {
         Roboto:"Roboto, sans-serif"
       },
       colors:{
-        Primary:"green"
+        Primary:"green",
+        Footer: '#ccd6f6'
       }
     },
   },
