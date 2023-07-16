@@ -83,7 +83,7 @@ const Bazar = ({ setBazarShow }) => {
 						{/* if there is a button, it will close the modal */}
 						<button onClick={() => setBazarShow(false)} className="btn btn-info">Close Me</button>
 					</div>
-					<h1 className='bg-red-200 mb-3 p-1 rounded inline-block'>These dates have not been picked up yet</h1>
+					<h1 className='bg-red-200 my-3 p-1 rounded inline-block'>These dates have not been picked up yet</h1>
 					<div className='flex space-x-2'>
 					{unmatchedElements.map((remaining, index) => {
 						return (
