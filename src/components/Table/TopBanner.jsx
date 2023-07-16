@@ -1,16 +1,35 @@
 import React, { useState } from 'react'
 import Bazar from '../Bazar/Bazar';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const TopBanner = () => {
   const [ShowBazar, setBazarShow] = useState(false);
   const UserData = JSON.parse(localStorage.getItem("UserLoginData"));
+  const navigate=useNavigate();
+  const handleLogout=()=>{
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      confirmButtonColor:"green",
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Logout!'
+    }).then((result) => {
+      localStorage.removeItem("UserLoginData")
+      if (result.isConfirmed) {
+        Swal.fire({ position: 'center', icon: 'success', text: 'Log out successful!', showConfirmButton: false, timer: 1500 });
+        return navigate("/login");
+      }
+    })
+   
+  }
   return (
     <div className='pt-10 font-Bitter bg-sky-100'>
       <div className='text-center'>
         <h1 className='text-2xl md:text-3xl lg:text-4xl'>Rangon House</h1> 
         <div className='flex gap-5 items-center justify-center mt-2'>  <p className=''>July, 2023</p>
           <p className="bg-transparent cursor-pointer text-green-600" onClick={() => setBazarShow(true)}>Show Details</p> 
-          <p className="tooltip" data-tip={`${UserData.name} (${UserData.room})`}>Login Info</p>
+          <p className="tooltip cursor-pointer tooltip-success" onClick={()=>handleLogout()} data-tip={`${UserData.name} (${UserData.room})`}>Log out</p>
           </div>
       </div>
       {/* Rules and Regulation */}
