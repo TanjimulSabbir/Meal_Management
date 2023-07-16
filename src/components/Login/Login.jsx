@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <div className='h-screen w-full flex justify-center items-center'>
-      <form onSubmit={handleSubmit} className='font-Lato border p-10 bg-gray-100 shadow-2xl rounded-2xl'>
+      <form onSubmit={handleSubmit} className='font-Lato border p-10 bg-green-100 shadow-2xl rounded-2xl'>
         <h1 className='text-center text-3xl text-black font-Lora'>Login</h1>
         <div className='flex flex-col gap-5 mt-7 mb-4'>
           <div className='relative flex flex-col space-y-[2px]'>
