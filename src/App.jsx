@@ -5,10 +5,6 @@ import PrivateRoute from './Layout/Shared/PrivateRoute';
 import NotFound from './components/NotFound/NotFound';
 
 const App = () => {
-  const UserData = JSON.parse(localStorage.getItem("UserLoginData"));
-  if (!UserData) {
-    return <Navigate to="/login" replace={true} />;
-  }
   return (
     <Routes>
       <Route path="/home" element={<PrivateRoute><Home></Home></PrivateRoute>} />

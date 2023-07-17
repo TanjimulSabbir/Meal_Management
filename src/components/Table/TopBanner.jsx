@@ -51,7 +51,7 @@ const TopBanner = () => {
             See Meal Selection Bylaws and Boundaries!
           </div>
           <div className="collapse-content rounded-2xl text-justify peer-checked:text-black">
-            <p><strong>W</strong>elcome! You can now place your meal from here. Please make your selection from the available date and duration. Remember, the meal ordering service is available from <strong className='text-green-600'>06.00 AM to 10.30 PM</strong> every day. Enjoy your meal! <br />
+            <p><strong className='font-Bitter font-extrabold'>W</strong>elcome! You can now place your meal from here. Please make your selection from the available date and duration. Remember, the meal ordering service is available from <strong className='text-green-600'>06.00 AM to 10.30 PM</strong> every day. Enjoy your meal! <br />
             </p>
             <p>
               Kindly requested you to <strong className='text-green-600'>refrain from changing others meal</strong> without permission. Your meal selection is personal and should not be shared or modified by others. Appreciated your cooperation in adhering to these rules.
