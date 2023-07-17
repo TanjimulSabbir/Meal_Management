@@ -5,8 +5,8 @@ import UserInfo from "../../assets/JsonFiles/Names.json"
 import Swal from "sweetalert2";
 
 const Login = () => {
+  document.title = `Home-Paradise Palms`;
   const navigate = useNavigate();
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const name = event.target.name.value;

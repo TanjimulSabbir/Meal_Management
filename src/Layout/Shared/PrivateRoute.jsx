@@ -4,6 +4,7 @@ import Login from '../../components/Login/Login';
 const PrivateRoute = ({ children }) => {
   const UserData = JSON.parse(localStorage.getItem("UserLoginData"));
   // const admin = (UserData.name === "Tanjim25");
+  document.title = `Login-Rangon House`;
   if (!UserData) {
     return <Login />;
   }
