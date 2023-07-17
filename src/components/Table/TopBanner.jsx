@@ -7,6 +7,12 @@ const TopBanner = () => {
   const [ShowBazar, setBazarShow] = useState(false);
   const UserData = JSON.parse(localStorage.getItem("UserLoginData"));
   const navigate = useNavigate();
+
+  // const handleLogoutAnyway=()=>{
+  //   localStorage.removeItem("UserLoginData");
+  //   Swal.fire({ position: 'center', icon: 'success', text: 'Login out successful!', showConfirmButton: false, timer: 2000 });
+  //   return navigate("/login");
+  // }
   const handleLogout = () => {
     Swal.fire({
       title: 'Are you sure?',
@@ -17,24 +23,23 @@ const TopBanner = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("UserLoginData");
-        Swal.fire({ position: 'center', icon: 'success', text: 'Login out successful!', showConfirmButton: false, timer: 1500 });
+        Swal.fire({ position: 'center', icon: 'success', text: 'Login out successful!', showConfirmButton: false, timer: 2000 });
         return navigate("/login");
       }
     })
-
   }
+
   return (
     <div className='pt-6 font-Bitter bg-sky-100'>
       <div className='text-center'>
         <h1 className='flex space-x-1 items-center justify-center'>
           <span className='text-3xl lg:text-4xl'>Rangon House</span>
         </h1>
-       
         <div className='flex gap-5 items-center justify-center mt-3'>
-        <p>July, 2023</p>
+          <p>July, 2023</p>
           <p className="bg-transparent tooltip tooltip-success cursor-pointer text-green-500" data-tip="Click for Details" onClick={() => setBazarShow(true)}>Show Details</p>
-    
-          <p className='tooltip cursor-pointer tooltip-bottom tooltip-success text-green-600' data-tip="Full-70tk, Dupur-40tk, N/M-40tk, D/M-45tk, Fri-Full(135tk), Fri-Dupur(90tk), Fri-N/M(50tk),  Fri-D/M(100tk)">Meal Types</p>
+
+          <p className='tooltip cursor-pointer tooltip-bottom tooltip-success text-green-600 z-50' data-tip="Full-70tk, Dupur-40tk, N/M-40tk, D/M-45tk, Fri-Full(135tk), Fri-Dupur(90tk), Fri-N/M(50tk),  Fri-D/M(100tk)">Meal Types</p>
           <p className="tooltip cursor-pointer tooltip-success text-green-600" onClick={() => handleLogout()} data-tip={`${UserData.name} (${UserData.room})`}>Log out</p>
         </div>
       </div>
@@ -67,8 +72,3 @@ const TopBanner = () => {
 
 export default TopBanner;
 
-// Swal.fire({
-//   position:'center',
-//   icon:"info",
-//   html:"<small style='color:green;text-align:center,font-family:Lora;'>To avoid messy meal management, the logout option has been temporarily disabled. Implemented a policy of one device (browser) per login. If you need to log out, please contact with manager</small>"
-// })

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const Login = () => {
   document.title = `Home-Rangon House`;
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const name = event.target.name.value;
@@ -28,11 +29,11 @@ const Login = () => {
     localStorage.setItem("UserLoginData", JSON.stringify({ name, room }));
     // for admin login
     if (admin) {
-      Swal.fire({ position: 'center', icon: 'success', text: 'Admin Login successful!', showConfirmButton: false, timer: 1500 });
+      Swal.fire({ position: 'center', icon: 'success', text: 'Admin Login successful!', showConfirmButton: false, timer: 2000 });
       return navigate('/meal-counter');
     }
     // normal login
-    Swal.fire({ position: 'center', icon: 'success', text: 'Login successful!', showConfirmButton: false, timer: 1500 });
+    Swal.fire({ position: 'center', icon: 'success', text: 'Login successful!', showConfirmButton: false, timer: 2000 });
     return navigate('/meal-counter');
   }
 

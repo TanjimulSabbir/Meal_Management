@@ -7,11 +7,10 @@ import NotFound from './components/NotFound/NotFound';
 const App = () => {
   return (
     <Routes>
+      <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
       <Route path="/login" element={<Login />} />
       <Route path="/meal-counter" element={<PrivateRoute><Home /></PrivateRoute>} />
-      <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
       <Route path="/*" element={<NotFound />} />
-
     </Routes>
   );
 };
