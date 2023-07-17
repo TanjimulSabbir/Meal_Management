@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import Cat from "../../assets/Photo/blond-cat-pot.jpg"
 
 function NotFound() {
     return (
-        <div className="bg-no-repeat bg-cover" style={{ backgroundImage: `url('https://img.freepik.com/premium-photo/two-raw-striploin-steak-new-york-beef-board-top-view-black-stone-background_187166-54697.jpg?w=996')` }}>
+        <div className="bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url('${Cat}')` }}>
             <div className='w-full h-screen flex justify-center items-center bg-black bg-opacity-70 font-Bitter' >
 
                 <div className='flex flex-col justify-center items-center'>
