@@ -18,14 +18,13 @@ const TableBody = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://meal-counter-server-side.vercel.app/getData');
-        if (response.statusText !== 'OK') {
-          return;
+        if (response.status !== 200) {
+          return Swal.fire({ position: 'center', icon: 'info', text: 'network error! try again', showConfirmButton: false, timer: 1500 });
         }
         const data = response.data;
         setAllData(data);
-        console.log(data, 'AllData');
       } catch (error) {
-        console.log(error);
+        Swal.fire({ position: 'center', icon: 'info', text: 'network error! try again', showConfirmButton: false, timer: 1500 });
       }
     }
     fetchData()
@@ -135,7 +134,8 @@ const TableBody = () => {
                     key={day.day}
                     className="bg-[green] cursor-pointer border text-black text-center font-bold"
                   >
-                    {`${day.day} ${((CellDay - CurrentDate) == 1) ? "(Bazar Day)" : ""}`}
+                    {`${day.day} ${((CellDay - CurrentDate) == 1) ? 
+                    "(Next Bazar-day)": (CellDay===CurrentDate)?"(CurrentDay)":""}`}
                   </th>
                 )
               })}
