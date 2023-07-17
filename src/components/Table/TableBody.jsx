@@ -38,7 +38,8 @@ const TableBody = () => {
   const NextPreviousDay = (day) => {
     const SpliteDay = parseInt(day.split(",")[1])
     console.log({ SpliteDay, CurrentDate })
-    return `Oops! It seems you're trying to select meal outside the designated ordering hours/date. You can not select meal ${SpliteDay < CurrentDate + 1 ? "<strong>current bazer previous-day</strong>" : "<strong>current bazar next-day</strong>"}. The meal selection service is available only current day from <strong>12.00 PM to 10.30 PM.</strong> Please come back during the specified hours to make your selection or contact with manager +8801780242695. 
+    return `Oops! It seems you're trying to select meal outside the designated ordering hours/date. You can not select meal ${SpliteDay < CurrentDate + 1 ? "<strong>next-bazar's previous-day</strong>" :
+      `${SpliteDay === CurrentDate + 1 ? "<strong>Before 12.00pm and after 10.30pm</strong>" : "<strong>next-bazar following-day</strong>"}`}. The meal selection service is available only current day from <strong>12.00 PM to 10.30 PM.</strong> Please come back during the specified hours to make your selection or contact with manager +8801780242695. 
     Thank you!`
   }
   const SpecificUser = 'You can only select your own meal. Please choose from your available options.'
@@ -54,11 +55,11 @@ const TableBody = () => {
       if (!(LoginUserName === name)) {
         Swal.fire({
           title: "Oopsie!",
-          html: "<p style='color:green; text-align:center; font-family: Lora;'>"+ SpecificUser + "</p>",
+          html: "<p style='color:green; text-align:center; font-family: Lora;'>" + SpecificUser + "</p>",
           icon: 'warning',
           showClass: { popup: 'animate__animated animate__fadeInDown' },
           hideClass: { popup: 'animate__animated animate__fadeOutUp' }
-        });        
+        });
         return;
       }
       if (!TimeRemaining) {
@@ -69,7 +70,7 @@ const TableBody = () => {
           showClass: { popup: 'animate__animated animate__fadeInDown' },
           hideClass: { popup: 'animate__animated animate__fadeOutUp' }
         });
-        
+
         return;
       }
     }
@@ -100,9 +101,9 @@ const TableBody = () => {
   const SendDataToDatabase = async (data) => {
     try {
       const response = await axios.post('https://meal-counter-server-side.vercel.app/addData', data);
-      if(response.status===200){
-      return Swal.fire({ position: 'center', icon: 'success', text: 'Meal successfully added!', showConfirmButton: false, timer: 1500 });
-      }else{
+      if (response.status === 200) {
+        return Swal.fire({ position: 'center', icon: 'success', text: 'Meal successfully added!', showConfirmButton: false, timer: 1500 });
+      } else {
         Swal.fire({ position: 'center', icon: 'info', text: 'network error! try again', showConfirmButton: false, timer: 1500 });
       }
       console.log(response.status);
@@ -134,8 +135,8 @@ const TableBody = () => {
                     key={day.day}
                     className="bg-[green] cursor-pointer border text-black text-center font-bold"
                   >
-                    {`${day.day} ${((CellDay - CurrentDate) == 1) ? 
-                    "(Next Bazar-day)": (CellDay===CurrentDate)?"(CurrentDay)":""}`}
+                    {`${day.day} ${((CellDay - CurrentDate) == 1) ?
+                      "(next bazar)" : (CellDay === CurrentDate) ? "(ToDay)" : ""}`}
                   </th>
                 )
               })}
