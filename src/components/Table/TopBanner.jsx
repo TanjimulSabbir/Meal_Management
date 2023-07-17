@@ -16,8 +16,8 @@ const TopBanner = () => {
       confirmButtonText: 'Yes, Logout!'
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem("UserLoginData")
-        Swal.fire({ position: 'center', icon: 'success', text: 'Log out successful!', showConfirmButton: false, timer: 1500 });
+        localStorage.removeItem("UserLoginData");
+        Swal.fire({ position: 'center', icon: 'success', text: 'Login out successful!', showConfirmButton: false, timer: 1500 });
         return navigate("/login");
       }
     })
@@ -63,3 +63,9 @@ const TopBanner = () => {
 }
 
 export default TopBanner;
+
+// Swal.fire({
+//   position:'center',
+//   icon:"info",
+//   html:"<small style='color:green;text-align:center,font-family:Lora;'>To avoid messy meal management, the logout option has been temporarily disabled. Implemented a policy of one device (browser) per login. If you need to log out, please contact with manager</small>"
+// })
