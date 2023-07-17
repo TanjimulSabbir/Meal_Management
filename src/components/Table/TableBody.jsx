@@ -32,21 +32,21 @@ const TableBody = () => {
   }, [customData])
 
   const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
-  const currentHour = new Date().getHours();
-  const currentMinutes = new Date().getMinutes();
-  const CurrentDate = parseInt(now.split("/")[1]);
+  const currentHour = new Date(now).getHours();
+  const currentMinutes = new Date(now).getMinutes();
+  const CurrentDate = new Date(now).getDate();
 
   const NextPreviousDay = (day) => {
     const SpliteDay = parseInt(day.split(",")[1])
     console.log({ SpliteDay, CurrentDate })
-    return `Oops! It seems you're trying to select meal outside the designated ordering hours/date. You can not select meal ${SpliteDay < CurrentDate+1 ? "<span style='color:black'>Current Bazer Previous-day</span>" : "<span style='color:black'>Current Bazar Next-day</span>"}. The meal selection service is available only current day from 12.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact with manager +8801780242695. 
+    return `Oops! It seems you're trying to select meal outside the designated ordering hours/date. You can not select meal ${SpliteDay < CurrentDate + 1 ? "<span style='color:black'>Current Bazer Previous-day</span>" : "<span style='color:black'>Current Bazar Next-day</span>"}. The meal selection service is available only current day from 06.00 AM to 10.30 PM. Please come back during the specified hours to make your selection or contact with manager +8801780242695. 
     Thank you!`
   }
   const SpecificUser = 'You can only select your own meal. Please choose from your available options.'
 
   const handleChange = (event, name, day) => {
     const EstimateDate = parseInt(day.split(",")[1]);
-    const isAllowedTime = currentHour < 23 || (currentHour === 22 && currentMinutes <= 30);
+    const isAllowedTime = currentHour >= 6 && (currentHour < 22 || (currentHour === 22 && currentMinutes <= 30));
     const TimeRemaining = (isAllowedTime && (EstimateDate - CurrentDate) == 1);
 
     console.log(((EstimateDate - CurrentDate) === 1), "EstimateDate, CurrentDate")
@@ -57,7 +57,7 @@ const TableBody = () => {
         return;
       }
       if (!TimeRemaining) {
-        Swal.fire({ title: "Oops!",  text:``, html: "<small style='color:green; text-align:justify'>" + NextPreviousDay(day) + "</small>", showClass: { popup: 'animate__animated animate__fadeInDown' }, hideClass: { popup: 'animate__animated animate__fadeOutUp' } });
+        Swal.fire({ title: "Oops!", text: ``, html: "<small style='color:green; text-align:justify'>" + NextPreviousDay(day) + "</small>", showClass: { popup: 'animate__animated animate__fadeInDown' }, hideClass: { popup: 'animate__animated animate__fadeOutUp' } });
         return;
       }
     }
