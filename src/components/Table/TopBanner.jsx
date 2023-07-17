@@ -23,7 +23,7 @@ const TopBanner = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("UserLoginData");
-        Swal.fire({ position: 'center', icon: 'success', text: 'Login out successful!', showConfirmButton: false, timer: 2000 });
+        Swal.fire({ position: 'center', icon: 'success', text: 'Logout successful!', showConfirmButton: false, timer: 2000 });
         return navigate("/login");
       }
     })
