@@ -11,12 +11,11 @@ const Bazar = ({ setBazarShow }) => {
 		}
 	}, []);
 	const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
-	const currentHour = new Date().getHours();
-	const currentMinute = new Date().getMinutes();
-	const isNoon = currentHour === 12 && currentMinute === 0;
-	const CurrentDate = parseInt(now.split("/")[1]);
+	const currentHour = new Date(now).getHours();
+	const currentMinute = new Date(now).getMinutes();
+	const CurrentDate = new Date(now).getDate();
+	const isNoon = currentHour > (currentHour === 12 && currentMinute === 0);
 
-	const RemainBazar = [];
 	const BazDates = UserInfo.users.filter(user => Boolean(parseInt(user.bazar)));
 
 	// const BazDates = UserInfo.users.filter(user => Boolean(parseInt(user.bazar)));
@@ -39,6 +38,7 @@ const Bazar = ({ setBazarShow }) => {
 			<dialog id="Bazar" className="modal">
 				<form method="dialog" className="modal-box w-11/12 max-w-5xl">
 					<h1 className='text-xl lg:text-3xl font-bold font-Lora text-center pt-2 pb-3'>All Details (July, 2023)</h1>
+
 					<div className="overflow-visible">
 						<table className="table table-zebra table-xs lg:table-md">
 							{/* head */}
@@ -56,6 +56,9 @@ const Bazar = ({ setBazarShow }) => {
 							</thead>
 							{UserInfo.users.map((user, index) => {
 								const BazarDay = parseInt(user.bazar.split(",")[0]);
+								const BazarStatus = <>{(BazarDay < CurrentDate) ?<span className='font-bold'>Bazar Done</span> :(BazarDay === CurrentDate) ? isNoon ?<span className='font-bold'>Bazar Done</span> :<strong className='text-green-600'>Vibrantly Ongoing</strong> :
+										BazarDay}
+								</>
 								return (
 									<>
 										<tbody>
@@ -68,8 +71,8 @@ const Bazar = ({ setBazarShow }) => {
 												<td className={`${CellStyle}`}></td>
 												<td className={`${CellStyle}`}></td>
 												<td className={`${CellStyle}`}></td>
-												<td className={`${CellStyle}`}>
-													{(BazarDay < CurrentDate) ? <span className='font-bold'>Bazar Done</span> : (BazarDay === CurrentDate) ? isNoon ? <span className='font-bold'>Bazar Done</span> : <strong className='text-green-600'>Vibrantly Ongoing</strong> : ""}
+												<td className={`${CellStyle} ${((BazarDay < CurrentDate) || ((BazarDay === CurrentDate) && isNoon)) ? "bg-green-500 font-bold" : "bg-white"} rounded min-w-[100px]`}>
+													{BazarStatus}
 												</td>
 											</tr>
 										</tbody>
@@ -78,25 +81,24 @@ const Bazar = ({ setBazarShow }) => {
 							})}
 						</table>
 					</div>
-				
+
 					<div className="modal-action">
 						{/* if there is a button, it will close the modal */}
 						<button onClick={() => setBazarShow(false)} className="btn btn-info mb-3">Close Me</button>
 					</div>
 					<h1 className='bg-red-200 my-3 p-1 rounded inline-block'>These dates have not been picked up yet</h1>
 					<div className='flex space-x-2'>
-					{unmatchedElements.map((remaining, index) => {
-						return (
-							<p key={index} className=''>
-								<span className='bg-green-400 rounded p-1'>{remaining.Date}, July 2023</span>
-							</p> 
-						)
-					})}
+						{unmatchedElements.map((remaining, index) => {
+							return (
+								<p key={index} className=''>
+									<span className='bg-green-400 rounded p-1'>{remaining.Date}, July 2023</span>
+								</p>
+							)
+						})}
 					</div>
 				</form>
-			
 			</dialog>
-		
+
 		</div>
 	)
 }
