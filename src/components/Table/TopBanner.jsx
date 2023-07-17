@@ -32,7 +32,7 @@ const TopBanner = () => {
         </h1>
        
         <div className='flex gap-5 items-center justify-center mt-3'>
-        <p className='tooltip tooltip-right tooltip-success cursor-pointer' data-tip="Manager: Tanjimul Islam Sabbir, Contact: +8801780242695">July, 2023</p>
+        <p>July, 2023</p>
           <p className="bg-transparent tooltip tooltip-success cursor-pointer text-green-500" data-tip="Click for Details" onClick={() => setBazarShow(true)}>Show Details</p>
     
           <p className='tooltip cursor-pointer tooltip-left tooltip-success text-green-600' data-tip="Full-70tk, Dupur-40tk, N/M-40tk, D/M-45tk, Friday-Full(135tk), Friday-Dupur(90tk), Friday-N/M(50tk),  Friday-D/M(100tk)">Meal Types</p>
