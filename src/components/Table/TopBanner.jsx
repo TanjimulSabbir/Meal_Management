@@ -35,7 +35,7 @@ const TopBanner = () => {
         <p>July, 2023</p>
           <p className="bg-transparent tooltip tooltip-success cursor-pointer text-green-500" data-tip="Click for Details" onClick={() => setBazarShow(true)}>Show Details</p>
     
-          <p className='tooltip cursor-pointer tooltip-left tooltip-success text-green-600' data-tip="Full-70tk, Dupur-40tk, N/M-40tk, D/M-45tk, Friday-Full(135tk), Friday-Dupur(90tk), Friday-N/M(50tk),  Friday-D/M(100tk)">Meal Types</p>
+          <p className='tooltip cursor-pointer tooltip-left tooltip-success text-green-600' data-tip="Full-70tk, Dupur-40tk, N/M-40tk, D/M-45tk, Fri-Full(135tk), Fri-Dupur(90tk), Fri-N/M(50tk),  Fri-D/M(100tk)">Meal Types</p>
           <p className="tooltip cursor-pointer tooltip-success text-green-600" onClick={() => handleLogout()} data-tip={`${UserData.name} (${UserData.room})`}>Log out</p>
         </div>
       </div>
