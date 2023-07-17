@@ -14,8 +14,9 @@ const Bazar = ({ setBazarShow }) => {
 	const currentHour = new Date(now).getHours();
 	const currentMinute = new Date(now).getMinutes();
 	const CurrentDate = new Date(now).getDate();
-	const isNoon = currentHour > (currentHour === 12 && currentMinute === 0);
+	const isNoon = currentHour >= 0 && currentHour < 12;
 
+console.log(isNoon,"isNoon")
 	const BazDates = UserInfo.users.filter(user => Boolean(parseInt(user.bazar)));
 
 	// const BazDates = UserInfo.users.filter(user => Boolean(parseInt(user.bazar)));
@@ -38,7 +39,6 @@ const Bazar = ({ setBazarShow }) => {
 			<dialog id="Bazar" className="modal">
 				<form method="dialog" className="modal-box w-11/12 max-w-5xl">
 					<h1 className='text-xl lg:text-3xl font-bold font-Lora text-center pt-2 pb-3'>All Details (July, 2023)</h1>
-
 					<div className="overflow-visible">
 						<table className="table table-zebra table-xs lg:table-md">
 							{/* head */}
@@ -56,22 +56,23 @@ const Bazar = ({ setBazarShow }) => {
 							</thead>
 							{UserInfo.users.map((user, index) => {
 								const BazarDay = parseInt(user.bazar.split(",")[0]);
-								const BazarStatus = <>{(BazarDay < CurrentDate) ?<span className='font-bold'>Bazar Done</span> :(BazarDay === CurrentDate) ? isNoon ?<span className='font-bold'>Bazar Done</span> :<strong className='text-green-600'>Vibrantly Ongoing</strong> :
-										BazarDay}
+								const BazarStatus = <>{(BazarDay < CurrentDate) ? <span className='bg-green-500 font-bold'>Bazar Done</span> : CurrentDate===BazarDay?<strong className='text-green-600'>Vibrantly Ongoing</strong>:BazarDay}
 								</>
+
+								const TdDynamicStyle=`${((BazarDay < CurrentDate) || ((BazarDay === CurrentDate) && !isNoon)) ? "bg-green-500 font-bold" : "bg-white"}`
 								return (
 									<>
 										<tbody>
 											{/* row 1 */}
 											<tr>
-												<td className={`${CellStyle} ${((BazarDay < CurrentDate) || ((BazarDay === CurrentDate) && isNoon)) ? "bg-green-500 font-bold" : "bg-white"} rounded`}>{index + 1}</td>
-												<td className={`${CellStyle} ${((BazarDay < CurrentDate) || ((BazarDay === CurrentDate) && isNoon)) ? "bg-green-500 font-bold" : "bg-white"} rounded`}>{user.name}</td>
-												<td className={`${CellStyle} ${((BazarDay < CurrentDate) || ((BazarDay === CurrentDate) && isNoon)) ? "bg-green-500 font-bold" : "bg-white"} rounded min-w-[100px]`}>{user.bazar}</td>
+												<td className={`${CellStyle} ${TdDynamicStyle} rounded`}>{index + 1}</td>
+												<td className={`${CellStyle} ${TdDynamicStyle} rounded`}>{user.name}</td>
+												<td className={`${CellStyle} ${TdDynamicStyle}  rounded min-w-[100px]`}>{user.bazar}</td>
 												<td className={`${CellStyle}`}></td>
 												<td className={`${CellStyle}`}></td>
 												<td className={`${CellStyle}`}></td>
 												<td className={`${CellStyle}`}></td>
-												<td className={`${CellStyle} ${((BazarDay < CurrentDate) || ((BazarDay === CurrentDate) && isNoon)) ? "bg-green-500 font-bold" : "bg-white"} rounded min-w-[100px]`}>
+												<td className={`${CellStyle} ${TdDynamicStyle} rounded min-w-[100px]`}>
 													{BazarStatus}
 												</td>
 											</tr>
