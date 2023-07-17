@@ -10,17 +10,14 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
         const matched = item.info.find(data => data.day == day)
         if (matched) {
             const FinalMatched = matched.day === day && FindName === name;
-            console.log(FinalMatched,"FinalMatched")
             // setCustomData(matched.cellData)
             if (FinalMatched) {
                 matchedFilter = matched.cellData
             }
         }
     })
-
     const TdCellDay = parseInt(day.split(",")[1]);
     const activeDay = ((TdCellDay - CurrentDate) == 1)
-
     return (
         <>
             <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName === name ? "bg-Primary" : `${activeDay ? "bg-blue-100" : "bg-white"}`}`} >

@@ -15,8 +15,6 @@ const Bazar = ({ setBazarShow }) => {
 	const currentMinute = new Date(now).getMinutes();
 	const CurrentDate = new Date(now).getDate();
 	const isNoon = currentHour >= 0 && currentHour < 12;
-
-console.log(isNoon,"isNoon")
 	const BazDates = UserInfo.users.filter(user => Boolean(parseInt(user.bazar)));
 
 	// const BazDates = UserInfo.users.filter(user => Boolean(parseInt(user.bazar)));
@@ -28,8 +26,6 @@ console.log(isNoon,"isNoon")
 			return DateSplite === DateSplit;
 		});
 	});
-
-	console.log({ BazDates })
 	const HeadStyle = "border border-black text-black text-center font-bold bg-green-500"
 	const CellStyle = "border border-black text-black"
 	return (

@@ -21,17 +21,14 @@ function RoomInput() {
       setRoomShowSuggestions(true)
     };
 
-    const roomHandleInputBlur = (event) => {
+    const roomHandleInputBlur = () => {
         // setRoomShowSuggestions(false);
     };
 
     const handleRoomClicked = (room) => {
-        console.log(room,"Li clicked")
         setInputValue(room);
         setRoomShowSuggestions(false);
       };
-    console.log(inputValue)
-
     return (
         <>
             <small>Room Number</small>

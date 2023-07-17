@@ -37,7 +37,6 @@ const TableBody = () => {
 
   const NextPreviousDay = (day) => {
     const SpliteDay = parseInt(day.split(",")[1])
-    console.log({ SpliteDay, CurrentDate })
     return `Oops! It seems you're trying to select meal outside the designated ordering hours/date. You can not select meal ${SpliteDay < CurrentDate + 1 ? "<strong>next-bazar's previous-day</strong>" :
       `${SpliteDay === CurrentDate + 1 ? "<strong>Before 12.00pm and after 10.30pm</strong>" : "<strong>next-bazar following-day</strong>"}`}. The meal selection service is available only current day from <strong>12.00 PM to 10.30 PM.</strong> Please come back during the specified hours to make your selection or contact with manager +8801780242695. 
     Thank you!`
@@ -49,7 +48,7 @@ const TableBody = () => {
     const isAllowedTime = currentHour >= 12 && (currentHour < 22 || (currentHour === 22 && currentMinutes <= 30));
     const TimeRemaining = (isAllowedTime && (EstimateDate - CurrentDate) == 1);
 
-    console.log(((EstimateDate - CurrentDate) === 1), "EstimateDate, CurrentDate")
+    // console.log(((EstimateDate - CurrentDate) === 1), "EstimateDate, CurrentDate")
 
     if (!(LoginUserName === "Tanjim25")) {
       if (!(LoginUserName === name)) {
@@ -106,7 +105,6 @@ const TableBody = () => {
       } else {
         Swal.fire({ position: 'center', icon: 'info', text: 'network error! try again', showConfirmButton: false, timer: 1500 });
       }
-      console.log(response.status);
     } catch (error) {
       Swal.fire({ position: 'center', icon: 'info', text: `${error.message}! Try again.`, showConfirmButton: false, timer: 1500 });
     }
