@@ -88,9 +88,14 @@ const TableBody = () => {
   const SendDataToDatabase = async (data) => {
     try {
       const response = await axios.post('http://localhost:5000/addData', data);
-      console.log(response);
+      if(response.status===200){
+      return Swal.fire({ position: 'center', icon: 'success', text: 'Meal successfully added!', showConfirmButton: false, timer: 1500 });
+      }else{
+        Swal.fire({ position: 'center', icon: 'info', text: 'network error! try again', showConfirmButton: false, timer: 1500 });
+      }
+      console.log(response.status);
     } catch (error) {
-      console.log(error);
+      Swal.fire({ position: 'center', icon: 'info', text: `${error.message}! Try again.`, showConfirmButton: false, timer: 1500 });
     }
   };
 

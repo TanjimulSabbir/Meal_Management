@@ -27,7 +27,7 @@ const TopBanner = () => {
     <div className='pt-6 font-Bitter bg-sky-100'>
       <div className='text-center'>
         <h1 className='text-3xl lg:text-4xl'>Rangon House</h1>
-        <div className='flex gap-5 items-center justify-center mt-2'>  <p className='tooltip tooltip-success text-green-600' data-tip="Manager: Tanjimul Islam Sabbir, Contact: 01780242695">July, 2023</p>
+        <div className='flex gap-5 items-center justify-center mt-2'>  <p className='tooltip tooltip-success' data-tip="Manager: Tanjimul Islam Sabbir, Contact: 01780242695">July, 2023</p>
           <p className="bg-transparent tooltip tooltip-success cursor-pointer text-green-600" data-tip="Click for Details" onClick={() => setBazarShow(true)}>Show Details</p>
 
           <p className="tooltip cursor-pointer tooltip-success text-green-600" onClick={() => handleLogout()} data-tip={`${UserData.name} (${UserData.room})`}>Log out</p>
@@ -48,7 +48,7 @@ const TopBanner = () => {
             <p>
               Kindly requested you to <strong className='text-green-600'>refrain from changing others meal</strong> without permission. Your meal selection is personal and should not be shared or modified by others. Appreciated your cooperation in adhering to these rules.
             </p>
-            <p> If you wish to make a manual food selection or have any specific requests, please contact with manager at <strong className='text-green-600'>+8801780242695</strong>. Please note that, updated your meal <strong className='text-green-600'>daily between 06.00 AM to 10.30 PM</strong> to ensure accurate and variety. Thank you for choosing your meal needs! <small className='text-[10px]'>(BD Timezone only)</small></p>
+            <p> If you wish to make a manual food selection or have any specific requests, please contact with manager at <strong className='text-green-600'>+8801780242695</strong>. Please note that, updated your meal <strong className='text-green-600'>daily between 06.00 AM to 10.30 PM</strong> to ensure accurate and variety. Thank you for choosing your meal needs! <small className='text-[10px] text-green-500'>(BD Timezone only)</small></p>
             <br />
             <p>Stay Inspired</p>
             <p>Manager, Rongon House</p>
