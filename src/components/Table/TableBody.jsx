@@ -17,7 +17,7 @@ const TableBody = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/getData');
+        const response = await axios.get('https://meal-counter-server-side.vercel.app/getData');
         if (response.statusText !== 'OK') {
           return;
         }
@@ -100,7 +100,7 @@ const TableBody = () => {
   };
   const SendDataToDatabase = async (data) => {
     try {
-      const response = await axios.post('http://localhost:5000/addData', data);
+      const response = await axios.post('https://meal-counter-server-side.vercel.app/addData', data);
       if(response.status===200){
       return Swal.fire({ position: 'center', icon: 'success', text: 'Meal successfully added!', showConfirmButton: false, timer: 1500 });
       }else{

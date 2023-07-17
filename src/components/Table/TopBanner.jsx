@@ -28,7 +28,6 @@ const TopBanner = () => {
       <div className='text-center'>
         <h1 className='flex space-x-1 items-center justify-center'>
           <span className='text-3xl lg:text-4xl'>Rangon House</span>
-         
         </h1>
        
         <div className='flex gap-5 items-center justify-center mt-3'>
