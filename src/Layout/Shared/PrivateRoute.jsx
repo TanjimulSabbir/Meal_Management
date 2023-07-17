@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Navigate } from "react-router-dom";
 import UserInfo from "../../assets/JsonFiles/Names.json";
 import Login from '../../components/Login/Login';
 
@@ -18,7 +18,7 @@ const PrivateRoute = ({ children }) => {
   if (UserExist || admin) {
     return children;
   } else {
-    return navigate("/login");
+    return <Navigate to="/login" replace={true} />
   }
 };
 
