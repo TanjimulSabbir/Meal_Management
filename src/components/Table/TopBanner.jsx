@@ -58,7 +58,7 @@ const TopBanner = () => {
             </p>
             <p> If you wish to make a manual food selection or have any specific requests, please contact with manager at <strong className='text-green-600'>+8801780242695</strong>. Please note that, updated your meal <strong className='text-green-600'>daily between 06.00 AM to 10.30 PM</strong> to ensure accurate and variety. Thank you for choosing your meal needs! <small className='text-[10px] text-green-500'>(BD Timezone only)</small></p>
             <br />
-            <p>Stay Inspired</p>
+            <p>Stay Inspired,</p>
             <p>Manager, Rongon House</p>
           </div>
         </div>

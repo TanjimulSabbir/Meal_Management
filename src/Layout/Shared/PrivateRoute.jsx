@@ -8,7 +8,7 @@ const PrivateRoute = ({ children }) => {
   // const admin = (UserData.name === "Tanjim25");
   document.title = `Login-Rangon House`;
   if (!UserData) {
-    return <Login />;
+    return <Navigate to="/login" replace={true} />;
   }
   const { name: UserName, room: UserRoom } = UserData;
   const UserExist = UserInfo.users.find((user) => user.name === UserName && user.room == UserRoom);
@@ -18,7 +18,7 @@ const PrivateRoute = ({ children }) => {
   if (UserExist || admin) {
     return children;
   } else {
-    return <Navigate to="/login" replace={true} />
+    return <Navigate to="/login" replace={true} />;
   }
 };
 
