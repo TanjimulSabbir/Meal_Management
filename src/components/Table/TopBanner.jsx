@@ -35,7 +35,7 @@ const TopBanner = () => {
         <h1 className='flex space-x-1 items-center justify-center'>
           <span className='text-3xl lg:text-4xl'>Rangon House</span>
         </h1>
-        <div className='flex gap-5 items-center justify-center mt-3'>
+        <div className='flex gap-4 md:gap-5 items-center justify-center mt-3'>
           <p>July, 2023</p>
           <p className="bg-transparent tooltip tooltip-success cursor-pointer text-green-500" data-tip="Click for Details" onClick={() => setBazarShow(true)}>Show Details</p>
 
