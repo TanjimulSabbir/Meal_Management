@@ -39,15 +39,15 @@ const TopBanner = () => {
           <p>July, 2023</p>
           <p className="bg-transparent tooltip tooltip-success cursor-pointer text-green-500" data-tip="Click for Details" onClick={() => setBazarShow(true)}>Show Details</p>
 
-          <p className='tooltip cursor-pointer tooltip-bottom tooltip-success text-green-600 z-50' data-tip="Full-70tk, Dupur-40tk, N/M-40tk, D/M-45tk, Fri-Full(135tk), Fri-Dupur(90tk), Fri-N/M(50tk),  Fri-D/M(100tk)">Meal Types</p>
-          <p className="tooltip cursor-pointer tooltip-success text-green-600" onClick={() => handleLogout()} data-tip={`${UserData.name} (${UserData.room})`}>Log out</p>
+          <p className='tooltip cursor-pointer tooltip-bottom tooltip-success text-green-500 z-50' data-tip="Full-70tk, Dupur-40tk, N/M-40tk, D/M-45tk, Fri-Full(135tk), Fri-Dupur(90tk), Fri-N/M(50tk),  Fri-D/M(100tk)">Meal Types</p>
+          <p className="tooltip cursor-pointer tooltip-success text-green-500" onClick={() => handleLogout()} data-tip={`${UserData.name} (${UserData.room})`}>Log out</p>
         </div>
       </div>
       {/* Rules and Regulation */}
       <div className='md:w-1/2 mx-auto'>
         <div className="collapse">
           <input type="checkbox" className="peer" />
-          <div className="collapse-title peer-checked:text-green-600 text-green-600 text-center" >
+          <div className="collapse-title peer-checked:text-green-500 text-green-500 text-center" >
             See Meal Selection Bylaws and Boundaries!
           </div>
           <div className="collapse-content rounded-2xl text-justify peer-checked:text-black">
