@@ -56,7 +56,7 @@ const TopBanner = () => {
             <p>
               Kindly requested you to <strong className='text-green-600'>refrain from changing others meal</strong> without permission. Your meal selection is personal and should not be shared or modified by others. Appreciated your cooperation in adhering to these rules.
             </p>
-            <p> If you wish to make a manual food selection or have any specific requests, please contact with manager at <strong className='text-green-600'>+8801780242695</strong>. Please note that, update your meal <strong className='text-green-600'>daily between 12.00 PM to 11.00 PM</strong> to ensure accurate and variety. Thank you for choosing your meal needs! <small className='text-[10px] text-green-600'>(BD Timezone only)</small></p>
+            <p> If you wish to make a manual food selection or have any specific requests, please contact with manager at <strong className='text-green-600'>+8801780242695</strong>. Please note that, update your meal <strong className='text-green-600'>daily between 12.00 PM to 11.00 PM</strong> to ensure accurate and variety. Thank you for choosing your meal needs! <small className='text-[10px] text-green-500 font-bold'>(BD Timezone only)</small></p>
             <br />
             <p>Stay Inspired,</p>
             <p>Manager, Rongon House</p>
