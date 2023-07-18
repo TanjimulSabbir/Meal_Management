@@ -144,7 +144,7 @@ const TableBody = () => {
                     className="bg-[green] cursor-pointer border text-black text-center font-bold"
                   >
                     {`${day.day} ${((CellDay - CurrentDate) == 1) ?
-                      "(next bazar)" : (CellDay === CurrentDate) ? "(Today)" : ""}`}
+                      "(Next day)" : (CellDay === CurrentDate) ? "(Today)" : ""}`}
                   </th>
                 )
               })}
