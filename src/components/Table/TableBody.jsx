@@ -49,7 +49,7 @@ const TableBody = () => {
 
   const handleChange = (event, name, day) => {
     const EstimateDate = parseInt(day.split(",")[1]);
-    const isAllowedTime= currentHour >= 12 && currentHour <= 23;
+    const isAllowedTime= currentHour >= 12 && currentHour < 23;
     console.log(isAllowedTime, "isAllowedTIME")
 
     const TimeRemaining = (isAllowedTime && (EstimateDate - CurrentDate) == 1);
