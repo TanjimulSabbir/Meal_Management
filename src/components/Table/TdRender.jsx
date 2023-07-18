@@ -1,5 +1,8 @@
+import Loader from "../../Loader/Loader";
 
-const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, handleChange, handleCustomSubmit, handleEdit, LoginUserName, CurrentDate }) => {
+
+
+const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, handleChange, handleCustomSubmit, handleEdit, LoginUserName, CurrentDate,Loading }) => {
     const cellKey = `${name}-${day}`;
     const isCustomCell = isCustom === cellKey;
     const hasCustomData = customData[cellKey];
@@ -17,7 +20,8 @@ const TdCellRender = ({ name, day, mealTypes, isCustom, customData, AllData, han
         }
     })
     const TdCellDay = parseInt(day.split(",")[1]);
-    const activeDay = ((TdCellDay - CurrentDate) == 1)
+    const activeDay = ((TdCellDay - CurrentDate) == 1);
+  
     return (
         <>
             <td key={`${name}-${day}`} className={`border font-Lora ${LoginUserName === name ? "bg-Primary" : `${activeDay ? "bg-blue-100" : "bg-white"}`}`} >

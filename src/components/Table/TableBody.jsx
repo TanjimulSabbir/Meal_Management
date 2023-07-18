@@ -4,20 +4,24 @@ import Names from "../../assets/JsonFiles/Names.json";
 import axios from "axios";
 import Swal from "sweetalert2";
 import TdCellRender from "./TdRender";
+import Loader from "../../Loader/Loader";
 
 const TableBody = () => {
   const [mealTypes, setMealTypes] = useState(["Full", "Dupur", "D/M", "N/M", 0, "Custom"]);
   const [customData, setCustomData] = useState({});
   const [isCustom, setIsCustom] = useState("");
   const [AllData, setAllData] = useState();
+  const [Loading, setLoader] = useState(false)
 
   const LocalData = JSON.parse(localStorage.getItem("UserLoginData"))
   const LoginUserName = LocalData.name;
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://meal-counter-server-side.vercel.app/getData');
+        setLoader(true)
         if (response.status !== 200) {
           return Swal.fire({ position: 'center', icon: 'info', text: 'network error! try again', showConfirmButton: false, timer: 1500 });
         }
@@ -29,7 +33,7 @@ const TableBody = () => {
     }
     fetchData()
   }, [customData])
-
+  console.log(AllData)
   const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
   const currentHour = new Date(now).getHours();
   const currentMinutes = new Date(now).getMinutes();
@@ -38,14 +42,16 @@ const TableBody = () => {
   const NextPreviousDay = (day) => {
     const SpliteDay = parseInt(day.split(",")[1])
     return `Oops! It seems you're trying to select meal outside the designated ordering hours/date. You can not select meal ${SpliteDay < CurrentDate + 1 ? "<strong>next-bazar's previous-day</strong>" :
-      `${SpliteDay === CurrentDate + 1 ? "<strong>Before 12.00pm and after 10.30pm</strong>" : "<strong>next-bazar following-day</strong>"}`}. The meal selection service is available only current day from <strong>12.00 PM to 10.30 PM.</strong> Please come back during the specified hours to make your selection or contact with manager +8801780242695. 
+      `${SpliteDay === CurrentDate + 1 ? "<strong>before 12.00pm and after 11.00pm</strong>" : "<strong>next-bazar following-day</strong>"}`}. The meal selection service is available only from <strong>12.00 PM to 11.00 PM.</strong> Please come back during the specified hours to make your selection or contact with manager +8801780242695. 
     Thank you!`
   }
   const SpecificUser = 'You can only select your own meal. Please choose from your available options.'
 
   const handleChange = (event, name, day) => {
     const EstimateDate = parseInt(day.split(",")[1]);
-    const isAllowedTime = currentHour >= 12 && (currentHour < 22 || (currentHour === 22 && currentMinutes <= 30));
+    const isAllowedTime= currentHour >= 12 && currentHour <= 23;
+    console.log(isAllowedTime, "isAllowedTIME")
+
     const TimeRemaining = (isAllowedTime && (EstimateDate - CurrentDate) == 1);
 
     // console.log(((EstimateDate - CurrentDate) === 1), "EstimateDate, CurrentDate")
@@ -69,7 +75,6 @@ const TableBody = () => {
           showClass: { popup: 'animate__animated animate__fadeInDown' },
           hideClass: { popup: 'animate__animated animate__fadeOutUp' }
         });
-
         return;
       }
     }
@@ -97,15 +102,20 @@ const TableBody = () => {
       [`${name}-${day}`]: "",
     }));
   };
+
   const SendDataToDatabase = async (data) => {
+    setLoader(true)
     try {
       const response = await axios.post('https://meal-counter-server-side.vercel.app/addData', data);
       if (response.status === 200) {
+        setLoader(false)
         return Swal.fire({ position: 'center', icon: 'success', text: 'Meal successfully added!', showConfirmButton: false, timer: 1500 });
       } else {
+        setLoader(false)
         Swal.fire({ position: 'center', icon: 'info', text: 'network error! try again', showConfirmButton: false, timer: 1500 });
       }
     } catch (error) {
+      setLoader(false)
       Swal.fire({ position: 'center', icon: 'info', text: `${error.message}! Try again.`, showConfirmButton: false, timer: 1500 });
     }
   };
@@ -134,7 +144,7 @@ const TableBody = () => {
                     className="bg-[green] cursor-pointer border text-black text-center font-bold"
                   >
                     {`${day.day} ${((CellDay - CurrentDate) == 1) ?
-                      "(next bazar)" : (CellDay === CurrentDate) ? "(ToDay)" : ""}`}
+                      "(next bazar)" : (CellDay === CurrentDate) ? "(Today)" : ""}`}
                   </th>
                 )
               })}
@@ -150,7 +160,7 @@ const TableBody = () => {
                 ${LoginUserName === user.name ? "bg-Primary" : "bg-gray-600 border"}`}>
                   {user.name}
                 </td>
-                {Days.days.map((day) => <TdCellRender key={day.day} {...{ mealTypes, isCustom, customData, name: user.name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit, LoginUserName, CurrentDate }}></TdCellRender>)}
+                {Days.days.map((day) => <TdCellRender key={day.day} {...{ mealTypes, isCustom, customData, name: user.name, day: day.day, AllData, handleChange, handleCustomSubmit, handleEdit, LoginUserName, CurrentDate, Loading }}></TdCellRender>)}
               </tr>
             ))}
           </tbody>

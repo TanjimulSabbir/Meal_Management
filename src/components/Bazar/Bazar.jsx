@@ -15,6 +15,7 @@ const Bazar = ({ setBazarShow }) => {
 	const currentMinute = new Date(now).getMinutes();
 	const CurrentDate = new Date(now).getDate();
 	const isNoon = currentHour >= 0 && currentHour < 12;
+	// const isNoon=true;
 	const BazDates = UserInfo.users.filter(user => Boolean(parseInt(user.bazar)));
 
 	// const BazDates = UserInfo.users.filter(user => Boolean(parseInt(user.bazar)));
@@ -52,7 +53,8 @@ const Bazar = ({ setBazarShow }) => {
 							</thead>
 							{UserInfo.users.map((user, index) => {
 								const BazarDay = parseInt(user.bazar.split(",")[0]);
-								const BazarStatus = <>{(BazarDay < CurrentDate) ? <span className='bg-green-500 font-bold'>Bazar Done</span> : CurrentDate===BazarDay?<strong className='text-green-600'>Vibrantly Ongoing</strong>:BazarDay}
+								const BazarStatus = <>{(BazarDay < CurrentDate) ? <span className='bg-green-500 font-bold'>Bazar Done</span> : CurrentDate===BazarDay&&!isNoon?<strong className='text-black font-bold'>Bazar Done</strong>:(CurrentDate===BazarDay&& isNoon)?"Vibrantly Ongoing":BazarDay}
+								{}
 								</>
 
 								const TdDynamicStyle=`${((BazarDay < CurrentDate) || ((BazarDay === CurrentDate) && !isNoon)) ? "bg-green-500 font-bold" : "bg-white"}`
