@@ -42,7 +42,7 @@ const TableBody = () => {
   const NextPreviousDay = (day) => {
     const SpliteDay = parseInt(day.split(",")[1])
     return `Oops! It seems you're trying to select meal outside the designated ordering hours/date. You can not select meal ${SpliteDay < CurrentDate + 1 ? "<strong>next-bazar's previous-day</strong>" :
-      `${SpliteDay === CurrentDate + 1 ? "<strong>before 12.00pm and after 11.00pm</strong>" : "<strong>next-bazar following-day</strong>"}`}. The meal selection service is available only from <strong>12.00 PM to 11.00 PM.</strong> Please come back during the specified hours to make your selection or contact with manager +8801780242695. 
+      `${SpliteDay === CurrentDate + 1 ? "<strong>as you may be outside the time range of 12:00 PM to 11:00 PM</strong>" : "<strong>next-bazar following-day</strong>"}`}. The meal selection service is available only from <strong>12.00 PM to 11.00 PM.</strong> Please come back during the specified hours to make your selection or contact with manager +8801780242695. 
     Thank you!`
   }
   const SpecificUser = 'You can only select your own meal. Please choose from your available options.'
