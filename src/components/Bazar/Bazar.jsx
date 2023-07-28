@@ -43,7 +43,8 @@ const Bazar = ({ setBazarShow }) => {
 								<tr>
 									<th className={HeadStyle}>Serial</th>
 									<th className={HeadStyle}>Name</th>
-									<th className={HeadStyle}> Bazar Date </th>
+									<th className={HeadStyle}>Bazar Date </th>
+									<th className={HeadStyle}>Bazar Cost </th>
 									<th className={HeadStyle}>Given Amount</th>
 									<th className={HeadStyle}>Total Expenses</th>
 									<th className={HeadStyle}>You Pay</th>
@@ -65,7 +66,8 @@ const Bazar = ({ setBazarShow }) => {
 											<tr>
 												<td className={`${CellStyle} ${TdDynamicStyle} rounded`}>{index + 1}</td>
 												<td className={`${CellStyle} ${TdDynamicStyle} rounded`}>{user.name}</td>
-												<td className={`${CellStyle} ${TdDynamicStyle}  rounded min-w-[100px]`}>{user.bazar}</td>
+												<td className={`${CellStyle} ${TdDynamicStyle}  rounded min-w-[120px]`}>{user.bazar}</td>
+												<td className={`${CellStyle} text-center`}>{user.bazarCost?user.bazarCost:0} TK</td>
 												<td className={`${CellStyle}`}></td>
 												<td className={`${CellStyle}`}></td>
 												<td className={`${CellStyle}`}></td>

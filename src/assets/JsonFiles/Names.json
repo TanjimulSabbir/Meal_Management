@@ -3,127 +3,227 @@
     {
       "name": "Arafat(Finance)",
       "room": 101,
-      "bazar": "26, July 2023"
+      "bazar": "",
+      "bazarCost":"",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Sazzad",
       "room": 101,
-      "bazar": "24, July 2023"
+      "bazar": "24, July 2023",
+      "bazarCost":"1325",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Rummon",
       "room": 101,
-      "bazar": "16, July 2023"
+      "bazar": "16, July 2023",
+      "bazarCost":"1498",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Usuf Vai",
       "room": 103,
-      "bazar": "14, July 2023"
+      "bazar": "14, July 2023",
+      "bazarCost":"2895",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Abir",
       "room": 103,
-      "bazar": "25, July 2023"
+      "bazar": "25, July 2023",
+      "bazarCost":"1350",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Sajedul",
       "room": 104,
-      "bazar": "13, July 2023"
+      "bazar": "13, July 2023",
+      "bazarCost":"1270",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Utsho",
       "room": 105,
-      "bazar": "30, July 2023"
+      "bazar": "30, July 2023",
+      "bazarCost":"",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Sadhin",
       "room": 105,
-      "bazar": "11, July 2023"
+      "bazar": "11, July 2023",
+      "bazarCost":"1130",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Saklain Vai",
       "room": 107,
-      "bazar": "N/A"
+      "bazar": "26, July 2023",
+      "bazarCost":"1410",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Ahsan",
       "room": 107,
-      "bazar": "17, July 2023"
+      "bazar": "17, July 2023",
+      "bazarCost":"1420",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Tanjimul",
       "room": 407,
-      "bazar": "18, July 2023"
+      "bazar": "18, July 2023",
+      "bazarCost":"1450",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Samit",
       "room": 407,
-      "bazar": "10, July 2023"
+      "bazar": "10, July 2023",
+      "bazarCost":"1150",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Tonmoy Vai",
       "room": 406,
-      "bazar": "21, July 2023"
+      "bazar": "21, July 2023",
+      "bazarCost":"2500",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Apu",
       "room": 406,
-      "bazar": "15, July 2023"
+      "bazar": "15, July 2023",
+      "bazarCost":"1500",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Asif (Finance)",
       "room": 405,
-      "bazar": "31, July 2023"
+      "bazar": "31, July 2023",
+      "bazarCost":"",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Mahmud",
       "room": 405,
-      "bazar": "27, July 2023"
+      "bazar": "27, July 2023",
+      "bazarCost":"1550",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Mintu",
       "room": 404,
-      "bazar": ""
+      "bazar": "",
+      "bazarCost":"",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Sanwar",
       "room": 404,
-      "bazar": "19, July 2023"
+      "bazar": "19, July 2023",
+      "bazarCost":"1440",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Kader Vai",
       "room": 403,
-      "bazar": "12, July 2023"
+      "bazar": "12, July 2023",
+      "bazarCost":"1425",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Maruf",
       "room": 402,
-      "bazar": "28, July 2023"
+      "bazar": "28, July 2023",
+      "bazarCost":"3380",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Asif (Market)",
       "room": 401,
-      "bazar": "09, July 2023"
+      "bazar": "09, July 2023",
+      "bazarCost":"1073 (1270)",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Abid",
       "room": 410,
-      "bazar": "29, July 2023"
+      "bazar": "29, July 2023",
+      "bazarCost":"",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Niloy",
       "room": 409,
-      "bazar": ""
+      "bazar": "",
+      "bazarCost":"",
+      "totalExpense":"",
+      "youPay":"",
+     "managerPay":"", "givenAmount":"" 
     },
     {
       "name": "Nibir",
       "room": 409,
-      "bazar": ""
+      "bazar": "",
+      "bazarCost":"",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     },
     {
       "name": "Arafat (Arabic)",
       "room": 406,
-      "bazar": "20, July 2023"
+      "bazar": "20, July 2023",
+      "bazarCost":"1200",
+      "totalExpense":"",
+      "youPay":"",
+      "managerPay":"", "givenAmount":""
     }
   ]
 }
